@@ -2,8 +2,8 @@
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
-let api_url = "http://localhost:8000";
-// let api_url = "https://sell-and-buy-mart-backend.vercel.app";
+// let api_url = "http://localhost:8000";
+let api_url = "https://blogs-160e.onrender.com";
 
 export default api_url;
 

@@ -63,7 +63,7 @@ function Contact() {
             >
                 <div className="md:w-1/2 mb-6 md:mb-0 max-h-[50vh] relative mx-1">
                 
-                    <img src="http://localhost:8000/data/images/2d5db27d-525c-4feb-88d0-0b353ddbc7f6.png" alt="Contact Us" className="rounded-md mb-4 w-full h-[360px] object-contain p-6"/>
+                    <img src={`${api_url}/data/images/2d5db27d-525c-4feb-88d0-0b353ddbc7f6.png`} alt="Contact Us" className="rounded-md mb-4 w-full h-[360px] object-contain p-6"/>
                     <div className='absolute inset-0 flex flex-col items-center justify-center text-center hidden'>
                         <h1 className="text-3xl ">Get in Touch</h1>
                         <p className="mt-2">We would love to hear from you. Please fill out the form to reach out to us.</p>

@@ -14,7 +14,7 @@ const NotificationItem = ({ notification, onReply }) => {
             <div className="flex items-center">
                 <img 
                 src={`${api_url}${notification.user_details.userImage}`} 
-                // src={`http://localhost:8000/data/images/2d5db27d-525c-4feb-88d0-0b353ddbc7f6.png`} 
+                // src={`${api_url}/data/images/2d5db27d-525c-4feb-88d0-0b353ddbc7f6.png`} 
                 alt="Sender" className="w-12 h-12 rounded-full object-cover mr-4 p-1" />
                 <div>
                     <h2 className="text-xl font-bold">{notification.subject}</h2>

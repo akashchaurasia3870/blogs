@@ -18,7 +18,7 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 const corsOptions = {
-    origin: '*',
+    origin: 'https://blogs-160e.onrender.com/',
     credentials: true,
     optionSuccessStatus: 200,
 }
@@ -105,6 +105,7 @@ app.get('*',(_,res)=>{
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running https://blogs-160e.onrender.com/`);
     connectToMongoDB();
 });
 
