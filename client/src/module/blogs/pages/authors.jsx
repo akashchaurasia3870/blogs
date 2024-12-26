@@ -49,13 +49,13 @@ function Authors() {
     }
 
     return (
-        <section className={`min-h-[100vh] authors w-full bg-${theme} px-4 flex flex-col justify-center items-center text-[8px] sm:text-sm md:text-md lg:text-lg`}>
+        <section className={`min-h-[100vh] authors w-full bg-${theme} px-2 md:px-4 flex flex-col justify-center items-center text-[9px] sm:text-sm md:text-md lg:text-lg`}>
 
             <Filter onSearch={handleSearch} onSort={handleSort} onLayoutChange={handleLayoutChange} />
         
             {authorData.length > 0 ?
 
-                <div className={` py-2 w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 rounded-lg`}
+                <div className={`py-2 w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 rounded-lg`}
                 style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                 >
                     {authorData.map((author) => {

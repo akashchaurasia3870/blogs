@@ -27,14 +27,14 @@ function ViewBlogs({handleSearch,handleSort,handleLayoutChange,blogs_data,layout
 
     return (
         <section className='p-3 mt-0'>
-            <div className='px-3'>
+            <div className='px-0 md:px-3'>
             <Filter onSearch={handleSearch}
                 onSort={handleSort}
                 onLayoutChange={handleLayoutChange} />
             </div>
             {blogs_data.length > 0 ? (
                 <>
-                    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 px-3 ${
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 px-0 md:px-3 ${
                         layout
                             ? 'lg:grid-cols-4'
                             : 'lg:grid-cols-3'
@@ -43,15 +43,15 @@ function ViewBlogs({handleSearch,handleSort,handleLayoutChange,blogs_data,layout
                             <BlogItemDetails data={blog_data} key={index} />
                         ))}
                     </div>
-                    <div className="slider px-2">
+                    <div className="slider px-0 md:px-2">
                     <Silk_Slider posts={trainding_data} title={"Trending Blogs"}
                         renderSlide={(post) => <BlogItemDetails data={post} />} slidesToShow={4} />
 
                    </div>
-                   <div className='px-3 pt-6'>
+                   <div className='px-1 md:px-3 pt-3 md:pt-6'>
                      <NewsLatter />
                    </div>
-                   <div className='px-3 pt-7'>
+                   <div className='px-1 md:px-3 pt-3 md:pt-6'>
                      <Contact />
                    </div>
                 </>

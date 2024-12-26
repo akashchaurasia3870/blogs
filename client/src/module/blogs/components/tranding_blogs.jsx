@@ -38,28 +38,23 @@ function TrendingBlogs() {
         // Return a linear gradient
         // return `linear-gradient(255deg, ${color1}, ${color2})`;
         return color1
-    }
-
-
+    }    
 
     return (
         <aside className={`w-full mt-5 lg:mt-0 lg:w-1/4 p-4  rounded-lg shadow-lg max-h-fit`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
-            <div className="author-section mt-2 mb-5">
-                <PopularAuthorCard />
-            </div>
             <div className="trending-blogs w-full ">
                 <h2 className="text-2xl font-bold mb-6">Trending Blogs</h2>
                 <ul className="space-y-3">
                     {blog_data.map((blog, index) => (
-                        <Link to={`/blog/${blog.blog_id}`} state={{ blogData: blog_data }} className=''>
+                        <Link to={`/blog/${blog.blog_id}`} state={{ blogData: blog_data }} className={``}>
                             <li key={blog.id}
-                                className="flex items-center space-x-3 p-4 my-3 rounded-lg"
-                                style={{ background: themeGenerator() }}>
-                                <span className="text-4xl">#{index + 1}</span>
+                                className={`flex items-center space-x-3 p-4 my-3 rounded-lg bg-${theme}`}
+                                // style={{ background: themeGenerator() }}
+                                >
+                                <span className="text-3xl md:text-4xl">#{index + 1}</span>
                                 <img
                                     src={api_url + blog.filePaths.images}
-                                    alt="Thumbnail"
-                                    className="w-16 h-16 rounded-full object-cover max-h-[5rem]"
+                                    className="w-16 h-16 rounded-full object-cover bg-gray-400"
                                 />
                                 <div className="flex flex-col">
                                     <h3 className="text-lg font-medium">{blog?.caption?.length > 13 ? blog?.caption?.substr(0, 13) + "..." : blog?.caption}</h3>

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import image_ref_c from '../../../assets/img/img1.jpg';
 import { BlogDataContext } from '../../../context/Blog_Context';
 import api_url from '../../../utils/utils';
-const Home = () => {
+const Home = ({menuChange}) => {
 
     const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
 
@@ -160,9 +160,7 @@ const Home = () => {
           </ul>
           <p
             className={` text-${fontColor}-600 cursor-pointer hover:underline`}
-            onClick={() => {
-              console.log("Open ", title);
-            }}
+            onClick={() => menuChange(title)}
           >
             See More
           </p>

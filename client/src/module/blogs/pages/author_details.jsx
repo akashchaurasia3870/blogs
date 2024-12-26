@@ -48,11 +48,11 @@ const AuthorDetails = () => {
     }, [author_id]);
 
     return (
-      <div className={`mx-auto p-6 bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
+      <div className={`mx-auto p-3 md:p-6 bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
         {/* <AuthorBio author_data={author_data} /> */}
-        <UserBio />
+        <UserBio author_data={author_data} />
         <AuthorsBlogs blogs_data={blogs_data} />
-        <Pagination />
+        {/* <Pagination /> */}
         {/* <PopularAuthors /> */}
       </div>
     );

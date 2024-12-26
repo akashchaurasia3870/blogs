@@ -37,6 +37,9 @@ function BlogDetails({ data }) {
         setBlog(blogData)
     }, [blog_id]);
 
+    console.log(blogData);
+    
+
     return (
         <section className={`min-h-[80vh] py-8 bg-${theme} text-[13px] sm:text-sm md:text-md lg:text-lg`}>
 
@@ -53,12 +56,6 @@ function BlogDetails({ data }) {
                         <div className="flex flex-col justify-center items-center">
                             <img src={img_path} alt="Blog Thumbnail" className="max-h-[30vh] rounded-lg object-contain" />
                             <p className="mt-8 leading-relaxed">{blog.content}</p>
-
-                            <p className="mt-8 leading-relaxed">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.  Quidem similique excepturi perspiciatis! Labore quasi laborum autem hic. Inventore, sit quia, ipsum unde natus aut explicabo praesentium expedita tempora deleniti, at repellat vel eius quaerat illum ipsam rerum eligendi? Dolore, iusto asperiores fuga dolorem quidem debitis esse architecto eum iure et consequuntur libero facilis. Ea quia totam omnis quas deleniti quod necessitatibus adipisci numquam reprehenderit aliquam quis iste quibusdam nemo aperiam, modi maiores explicabo laudantium eum ipsam eius unde autem aut enim cupiditate? Animi minima est illo, quibusdam omnis officia architecto possimus nostrum perferendis molestias! Natus iure alias in itaque corrupti.
-
-                            </p>
-                            
                         </div>
 
                         {/* Additional Blog Information */}
@@ -125,7 +122,7 @@ function BlogDetails({ data }) {
             </div>
 
             <div className="mt-6 -mx-2">
-                <PopularAuthors authors_data={authors_data} />
+                <PopularAuthors authors_id={blogData?.user_id} />
             </div>
 
             <div className="slider py-4 px-2">

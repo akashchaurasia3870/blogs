@@ -28,7 +28,7 @@ function Navbar() {
             </div>
 
             <div className='w-[80%] lg:w-[40%]'>
-                {is_login && <div className="sm:space-x-2 md:space-x-6 flex items-center justify-between">
+                {is_login && <div className="space-x-1 md:space-x-2 flex items-center justify-between">
 
                     <Link to="/" className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Home</Link>
                     <Link to="/profile" className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Account</Link>

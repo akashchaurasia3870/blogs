@@ -26,7 +26,7 @@ const MainContent = ({ activePage,onMenuItemClick }) => {
     const renderPageContent = () => {
         switch (activePage) {
             case 'Home':
-                return <Home />;
+                return <Home menuChange={onMenuItemClick} />;
             case 'Blogs':
                 return <Blogs />;
             case 'Users':
@@ -42,7 +42,7 @@ const MainContent = ({ activePage,onMenuItemClick }) => {
             case 'Accounts':
                 return <Accounts />;
             default:
-                return <Home />;
+                return <Home menuChange={onMenuItemClick} />;
         }
     };
 

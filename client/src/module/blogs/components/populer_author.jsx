@@ -13,6 +13,7 @@ const PopularAuthors = () => {
     const [dataSize, setDataLimit] = useState(5);
     const [totalAuthors, setTotalAuthors] = useState(0);
 
+    
     const fetchAuthors = async (limit) => {
         try {
             const response = await fetch(`${api_url}/users/get_author`,
@@ -47,7 +48,7 @@ const PopularAuthors = () => {
             <h1 className={`text-2xl font-bold mb-6 text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>Popular Authors</h1>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
                 {authors.length > 0 && authors.map((author) => (
-                    <PopularAuthorCard key={author.user_id} author={author} />
+                    <PopularAuthorCard key={author.user_id} author_id={author.user_id} />
                 ))}
             </div>
         </div>

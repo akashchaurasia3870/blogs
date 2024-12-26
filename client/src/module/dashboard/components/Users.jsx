@@ -144,16 +144,16 @@ const Users = () => {
                         >
                             <thead className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>
                             <tr>
-                                <th className="px-5 py-3 border-b-2 text-left  font-semibold uppercase tracking-wider">
+                                <th className="px-2 py-1 md:px-5 md:py-3 border-b-2 text-left  font-semibold uppercase md:tracking-wider">
                                 User
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
+                                <th className="px-2 py-1 md:px-5 md:py-3 border-b-2 text-left  font-semibold  uppercase md:tracking-wider">
                                 Email
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
+                                <th className="px-2 py-1 md:px-5 md:py-3 border-b-2 text-left  font-semibold  uppercase md:tracking-wider">
                                 Date Created
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
+                                <th className="px-2 py-1 md:px-5 md:py-3 border-b-2 text-left  font-semibold  uppercase md:tracking-wider">
                                 Verified
                                 </th>
                             </tr>
@@ -162,17 +162,17 @@ const Users = () => {
                             {sortedUsers?.map((item) => (
                                 <tr key={item.id} className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
                                 >
-                                <td className="px-5 py-5 flex flex-col justify-center items-center">
-                                    <img src={api_url+item.userImage} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
-                                    <span>{item.username}</span>
+                                <td className="p-2 md:p-5 flex flex-col justify-center items-center">
+                                    <img src={api_url+item.userImage} alt={'img'} className="w-8 h-8 md:w-16 md:h-16 rounded-full object-cover" />
+                                    <span className='text-center mt-2'>{item.username}</span>
                                 </td>
-                                <td className="px-5 py-5">
+                                <td className="p-2 md:p-5">
                                     <p className=" whitespace-no-wrap">{item.email}</p>
                                 </td>
-                                <td className="px-5 py-5">
+                                <td className="p-2 md:p-5">
                                     <p className=" whitespace-no-wrap">{item.createdAt}</p>
                                 </td>
-                                <td className="px-5 py-5">
+                                <td className="p-2 md:p-5">
                                     <p className=" whitespace-no-wrap">{item.verified?'True':'False'}</p>
                                 </td>
                                 </tr>

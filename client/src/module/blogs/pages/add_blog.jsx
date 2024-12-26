@@ -158,8 +158,8 @@ const AddBlog = () => {
 
     return (
         <div className={`min-h-screen bg-${theme} flex items-center justify-center text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
-            <div className="p-8 rounded-lg shadow-md w-full">
-                <h2 className="text-2xl font-semibold mb-6">Create a New Blog Post</h2>
+            <div className="p-3 md:p-8 rounded-lg shadow-md w-full">
+                <h2 className="text-2xl font-semibold mb-6">Create A Blog Post</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex flex-col items-start justify-center p-3 rounded-lg" 
                     style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}

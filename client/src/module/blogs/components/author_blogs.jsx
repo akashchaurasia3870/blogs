@@ -5,7 +5,7 @@ const AuthorsBlogs = ({blogs_data}) => {
 
   let [layout,setLayout] = useState(true);
     return (
-      <div className="mt-8">
+      <div className="mt-3 md:mt-8">
         {blogs_data.length > 0 ? (
                 <>
                     <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${

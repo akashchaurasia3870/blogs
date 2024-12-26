@@ -153,15 +153,15 @@ const Profile = () => {
     return (
         <div className={`flex flex-col items-center justify-center min-h-screen bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle} p-4`} 
         >
-            <div className="p-6 rounded-lg shadow-md w-full">
+            <div className="p-0 md:p-6 rounded-lg shadow-md w-full">
                 <div className="flex flex-col justify-center items-center ">
                     {/* User Image Section */}
                     <div className="w-full flex flex-col items-center justify-center"             
                     >
                         <img
                             src={image_url}
-                            alt="User"
-                            className="rounded-full h-32 w-32 object-cover mb-4 shadow-md p-1"
+                            alt=""
+                            className="rounded-full h-32 w-32 object-cover mb-4 shadow-md p-1 bg-gray-500"
                         />
                         {isEditable && (
                             <input

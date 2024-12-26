@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import { BlogDataContext } from '../../context/Blog_Context';
 import api_url from '../../utils/utils';
 
+import contact_img from '../../assets/img/contact.png'
+
 function Contact() {
     let { theme,theme2,fontColor,fontStyle,fontWeight}  = useContext(BlogDataContext);
 
@@ -58,16 +60,16 @@ function Contact() {
 
     return (
         <div>
-            <div className={`flex flex-col md:flex-row p-6 rounded-lg shadow-lg text-${fontColor}-600 ${fontWeight} ${fontStyle}`}
+            <div className={`flex flex-col md:flex-row p-2 md:p-6 rounded-lg shadow-lg text-${fontColor}-600 ${fontWeight} ${fontStyle}`}
             style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
             >
-                <div className="md:w-1/2 mb-6 md:mb-0 max-h-[50vh] relative mx-1">
+                <div className="md:w-1/2 md:mb-0 max-h-[50vh] flex items-center justify-center mx-1">
                 
-                    <img src={`${api_url}/data/images/2d5db27d-525c-4feb-88d0-0b353ddbc7f6.png`} alt="Contact Us" className="rounded-md mb-4 w-full h-[360px] object-contain p-6"/>
-                    <div className='absolute inset-0 flex flex-col items-center justify-center text-center hidden'>
+                    <img src={contact_img} alt="Contact Us" className="rounded-md mb-4 w-full h-[360px] object-contain p-0 md:p-6"/>
+                    {/* <div className='absolute inset-0 flex flex-col items-center justify-center text-center hidden'>
                         <h1 className="text-3xl ">Get in Touch</h1>
                         <p className="mt-2">We would love to hear from you. Please fill out the form to reach out to us.</p>
-                    </div>
+                    </div> */}
                 </div>
 
 
