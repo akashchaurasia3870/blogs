@@ -1,0 +1,199 @@
+{
+    "user_id": 1,
+    "username": "john_doe",
+    "userImage": "https://example.com/images/john_doe.jpg",
+    "address": "123 Main St, Anytown, USA",
+    "followers": 150,
+    "following": 75,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Hello world!",
+            "timestamp": "2023-10-01T12:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "Another post",
+            "timestamp": "2023-10-02T14:30:00Z"
+        }
+    ]
+}
+,
+{
+    "user_id": 2,
+    "username": "jane_doe",
+    "userImage": "https://example.com/images/jane_doe.jpg",
+    "address": "456 Elm St, Othertown, USA",
+    "followers": 200,
+    "following": 100,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Good morning!",
+            "timestamp": "2023-10-03T08:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "Enjoying the day",
+            "timestamp": "2023-10-03T12:00:00Z"
+        }
+    ]
+},
+{
+    "user_id": 3,
+    "username": "alice_smith",
+    "userImage": "https://example.com/images/alice_smith.jpg",
+    "address": "789 Oak St, Sometown, USA",
+    "followers": 300,
+    "following": 150,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Loving this weather!",
+            "timestamp": "2023-10-04T09:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "Had a great lunch",
+            "timestamp": "2023-10-04T13:00:00Z"
+        }
+    ]
+},
+{
+    "user_id": 4,
+    "username": "bob_jones",
+    "userImage": "https://example.com/images/bob_jones.jpg",
+    "address": "101 Pine St, Anycity, USA",
+    "followers": 250,
+    "following": 125,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Just finished a workout",
+            "timestamp": "2023-10-05T07:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "Feeling great!",
+            "timestamp": "2023-10-05T10:00:00Z"
+        }
+    ]
+},
+{
+    "user_id": 5,
+    "username": "charlie_brown",
+    "userImage": "https://example.com/images/charlie_brown.jpg",
+    "address": "202 Birch St, Anyville, USA",
+    "followers": 180,
+    "following": 90,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Reading a new book",
+            "timestamp": "2023-10-06T11:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "Loving it so far",
+            "timestamp": "2023-10-06T15:00:00Z"
+        }
+    ]
+},
+{
+    "user_id": 6,
+    "username": "david_clark",
+    "userImage": "https://example.com/images/david_clark.jpg",
+    "address": "303 Cedar St, Anytown, USA",
+    "followers": 220,
+    "following": 110,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Just cooked a new recipe",
+            "timestamp": "2023-10-07T18:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "It turned out great!",
+            "timestamp": "2023-10-07T19:00:00Z"
+        }
+    ]
+},
+{
+    "user_id": 7,
+    "username": "emily_davis",
+    "userImage": "https://example.com/images/emily_davis.jpg",
+    "address": "404 Maple St, Othertown, USA",
+    "followers": 270,
+    "following": 135,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Went for a hike",
+            "timestamp": "2023-10-08T06:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "Beautiful views!",
+            "timestamp": "2023-10-08T09:00:00Z"
+        }
+    ]
+},
+{
+    "user_id": 8,
+    "username": "frank_evans",
+    "userImage": "https://example.com/images/frank_evans.jpg",
+    "address": "505 Walnut St, Sometown, USA",
+    "followers": 190,
+    "following": 95,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Watching a movie",
+            "timestamp": "2023-10-09T20:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "It's really good",
+            "timestamp": "2023-10-09T22:00:00Z"
+        }
+    ]
+},
+{
+    "user_id": 9,
+    "username": "grace_hall",
+    "userImage": "https://example.com/images/grace_hall.jpg",
+    "address": "606 Chestnut St, Anycity, USA",
+    "followers": 230,
+    "following": 115,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Just finished a project",
+            "timestamp": "2023-10-10T17:00:00Z"
+        },
+        {
+            "post_id": 2,
+            "content": "Feeling accomplished",
+            "timestamp": "2023-10-10T19:00:00Z"
+        }
+    ]
+},
+{
+    "user_id": 10,
+    "username": "henry_lee",
+    "userImage": "https://example.com/images/henry_lee.jpg",
+    "address": "707 Spruce St, Anyville, USA",
+    "followers": 210,
+    "following": 105,
+    "posts": [
+        {
+            "post_id": 1,
+            "content": "Playing a new game",
+        },
+        {
+            "post_id": 2,
+            "content": "It's really"
+        }
+    ]
+}

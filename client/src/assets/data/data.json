@@ -1,0 +1,636 @@
+ { 
+    "dummy_blogs" : [
+    {
+        "id": 1,
+        "thumbnail": "img1",
+        "category": "education",
+        "title": "This is the title of very first blog on this blog",
+        "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet deserunt voluptates nostrum quisquam.",
+        "author_id": 2
+    },
+    {
+        "id": 2,
+        "thumbnail": "img2",
+        "category": "sports",
+        "title": "This is the title of very first blog on this blog",
+        "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet deserunt voluptates nostrum quisquam.",
+        "author_id": 3
+    },{
+        "id": 3,
+        "thumbnail": "img4",
+        "category": "spiderman",
+        "title": "This is the title of very first blog on this blog",
+        "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet deserunt voluptates nostrum quisquam.",
+        "author_id": 4
+    },{
+        "id": 4,
+        "thumbnail": "img5",
+        "category": "ironman",
+        "title": "This is the title of very first blog on this blog",
+        "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet deserunt voluptates nostrum quisquam.",
+        "author_id": 5
+    },{
+        "id": 5,
+        "thumbnail": "img1",
+        "category": "batman",
+        "title": "This is the title of very first blog on this blog",
+        "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet deserunt voluptates nostrum quisquam.",
+        "author_id": 6
+    },{
+        "id": 6,
+        "thumbnail": "img1",
+        "category": "spiderman",
+        "title": "This is the title of very first blog on this blog",
+        "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet deserunt voluptates nostrum quisquam.",
+        "author_id": 7
+    }
+    ],
+    "dummy_users":[
+        {
+            "id":"1",
+            "name":"Spider-Man",
+            "email":"spidey@example.com",
+            "password":"123456789"
+        },
+        {
+            "id":"1",
+            "name":"Iron-Man",
+            "email":"ironman@example.com",
+            "password":"123456789"
+        },
+        {
+            "id":"1",
+            "name":"Bat-Man",
+            "email":"batman@example.com",
+            "password":"123456789"
+        }
+    ]
+    ,
+    "dummy_authors":[
+        {
+            "id":"1",
+            "name":"Spider-Man",
+            "avatar":"img1",
+            "blogs":"7",
+            "theme":"471069"
+        },
+        {
+            "id":"2",
+            "name":"Iron-Man",
+            "avatar":"img2",
+            "blogs":"3",
+            "theme":"ffb88e"
+
+        },
+        {
+            "id":"3",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"f74c06"
+        },
+        {
+            "id":"4",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"7c65a9"
+        },{
+            "id":"5",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"439cfb"
+        },{
+            "id":"6",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"9bafd9"
+        },{
+            "id":"7",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"bf0fff"
+        },{
+            "id":"8",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"0061ff"
+        },{
+            "id":"9",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff1b6b"
+        },{
+            "id":"10",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"40c9ff"
+        }
+        ,{
+            "id":"11",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff0f7b"
+        },{
+            "id":"12",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff930f"
+        }
+        ,{
+            "id":"1",
+            "name":"Spider-Man",
+            "avatar":"img1",
+            "blogs":"7",
+            "theme":"471069"
+        },
+        {
+            "id":"2",
+            "name":"Iron-Man",
+            "avatar":"img2",
+            "blogs":"3",
+            "theme":"ffb88e"
+
+        },
+        {
+            "id":"3",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"f74c06"
+        },
+        {
+            "id":"4",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"7c65a9"
+        },{
+            "id":"5",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"439cfb"
+        },{
+            "id":"6",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"9bafd9"
+        },{
+            "id":"7",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"bf0fff"
+        },{
+            "id":"8",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"0061ff"
+        },{
+            "id":"9",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff1b6b"
+        },{
+            "id":"10",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"40c9ff"
+        }
+        ,{
+            "id":"11",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff0f7b"
+        },{
+            "id":"12",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff930f"
+        },{
+            "id":"1",
+            "name":"Spider-Man",
+            "avatar":"img1",
+            "blogs":"7",
+            "theme":"471069"
+        },
+        {
+            "id":"2",
+            "name":"Iron-Man",
+            "avatar":"img2",
+            "blogs":"3",
+            "theme":"ffb88e"
+        },
+        {
+            "id":"3",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"f74c06"
+        },
+        {
+            "id":"4",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"7c65a9"
+        },{
+            "id":"5",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"439cfb"
+        },{
+            "id":"6",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"9bafd9"
+        },{
+            "id":"7",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"bf0fff"
+        },{
+            "id":"8",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"0061ff"
+        },{
+            "id":"9",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff1b6b"
+        },{
+            "id":"10",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"40c9ff"
+        }
+        ,{
+            "id":"11",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff0f7b"
+        },{
+            "id":"12",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff930f"
+        },{
+            "id":"1",
+            "name":"Spider-Man",
+            "avatar":"img1",
+            "blogs":"7",
+            "theme":"471069"
+        },
+        {
+            "id":"2",
+            "name":"Iron-Man",
+            "avatar":"img2",
+            "blogs":"3",
+            "theme":"ffb88e"
+
+        },
+        {
+            "id":"3",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"f74c06"
+        },
+        {
+            "id":"4",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"7c65a9"
+        },{
+            "id":"5",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"439cfb"
+        },{
+            "id":"6",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"9bafd9"
+        },{
+            "id":"7",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"bf0fff"
+        },{
+            "id":"8",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"0061ff"
+        },{
+            "id":"9",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff1b6b"
+        },{
+            "id":"10",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"40c9ff"
+        }
+        ,{
+            "id":"11",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff0f7b"
+        },{
+            "id":"12",
+            "name":"Bat-Man",
+            "avatar":"img4",
+            "blogs":"5",
+            "theme":"ff930f"
+        }
+    ],
+    "blog_data":
+    [{
+        "_id": {
+          "$oid": "66c19eb60e4ce88218024595"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/15f58d7e-d32f-443e-beb6-2ab28fbc8341.png"
+          ],
+          "videos": []
+        },
+        "caption": "Straw Hat Luffy",
+        "content": "Luffy is the captain of the Straw Hat Pirates and has a dream to find the legendary One Piece and become the Pirate King. He has a cheerful and adventurous personality and ate the Gum-Gum Fruit, granting him the ability to stretch like rubber.",
+        "hashtags": [
+          "#KING",
+          "#Gum-Gum Fruit",
+          "#Haki"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": "2024-08-18T07:11:50.369Z",
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c19f380e4ce8821802459a"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/233c82b0-b447-471a-9f0f-b63eae0839ae.png"
+          ],
+          "videos": []
+        },
+        "caption": "Pirate Hunter Zoro",
+        "content": "Zoro is the swordsman of the Straw Hat Pirates and dreams of becoming the world's greatest swordsman. He wields three swords using his Santoryu style and has a strong sense of loyalty and dedication to his crew.",
+        "hashtags": [
+          "#Santoryu(Three-Sword Style)",
+          "#Haki"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": "2024-08-18T07:14:00.966Z"
+        ,
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c19fd10e4ce8821802459f"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/3753e9f0-979d-43d9-b2a6-d075d796dc37.png"
+          ],
+          "videos": []
+        },
+        "caption": "Cat Burglar Nami",
+        "content": "Nami is the navigator of the Straw Hat Pirates and dreams of creating a complete map of the world. She is skilled in navigation and has the ability to manipulate weather using her Clima-Tact.",
+        "hashtags": [
+          "#Navigation",
+          "#Weather",
+          "#manipulation"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created":"2024-08-18T07:16:33.401Z"
+        ,
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c1a0140e4ce882180245a4"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/ce9a4eb0-e09d-4ac7-8e2c-c02691f826ce.png"
+          ],
+          "videos": []
+        },
+        "caption": "God Usopp",
+        "content": "Usopp is the sniper and inventor of the Straw Hat Pirates. He is known for his tall tales and stories but is brave and resourceful in tough situations. He aims to become a brave and legendary warrior of the sea like his father, Yasopp.",
+        "hashtags": [
+          "#Sniping",
+          "#Inventor",
+          "#Haki"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": "2024-08-18T07:17:40.746Z"
+        ,
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c1a0630e4ce882180245a9"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/90860a56-e5a1-4d7e-9fb3-3fed4e026ba0.png"
+          ],
+          "videos": []
+        },
+        "caption": "Black Leg Sanji",
+        "content": "Sanji is the cook of the Straw Hat Pirates and a skilled martial artist who uses his legs in combat, earning him the nickname 'Black Leg.' He is also a chivalrous gentleman, and his dream is to find the All Blue, a legendary sea that contains every kind of fish from all four oceans.",
+        "hashtags": [
+          "#Black-Leg-Style(Kempo)",
+          "#Haki"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": "2024-08-18T07:18:59.692Z"
+        ,
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c1a0b50e4ce882180245ae"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/456bfb1e-99f3-471c-be42-11425db3a50b.png"
+          ],
+          "videos": []
+        },
+        "caption": "Devil Child Robin",
+        "content": "Robin is the archaeologist of the Straw Hat Pirates and possesses the Flower-Flower Fruit, which allows her to sprout body parts on any surface. She is highly intelligent and seeks to uncover the lost history of the world by finding and decoding the Rio Poneglyphs.",
+        "hashtags": [
+          "#Flower-Flower Fruit(Hana Hana no Mi)",
+          "#Archaeology",
+          "#Haki"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": "2024-08-18T07:20:21.102Z"
+        ,
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c1a1090e4ce882180245b3"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/62416f7e-6321-42ec-aed0-c86d9250b7ca.png"
+          ],
+          "videos": []
+        },
+        "caption": "Cotton Candy Lover Chopper",
+        "content": "Chopper is the doctor and mascot of the Straw Hat Pirates. He ate the Human-Human Fruit, granting him the ability to transform into several human-reindeer hybrid forms. Despite his cute appearance, Chopper is a skilled doctor with a dream to become a great doctor and cure any disease or ailment.",
+        "hashtags": [
+          "#Human-Human Fruit(Zoan type)",
+          "#Medical-knowledge"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": {
+          "$date": "2024-08-18T07:21:45.289Z"
+        },
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c1a16b0e4ce882180245bc"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/e03fcfaf-d609-4547-8cb0-46204ebe4096.png"
+          ],
+          "videos": []
+        },
+        "caption": "Iron Man Franky",
+        "content": "Franky is the shipwright of the Straw Hat Pirates and a skilled carpenter. He is also a cyborg after modifying his own body. Franky is known for his cola-powered attacks and has a dream to build and sail a dream ship to the end of the Grand Line.",
+        "hashtags": [
+          "#Carpentry",
+          "#Cyborg ",
+          "#Modifications"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": "2024-08-18T07:23:23.279Z"
+        ,
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c1a1d80e4ce882180245c1"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/7d13f5a6-58fd-4b15-be52-d1c108d85cf5.png"
+          ],
+          "videos": []
+        },
+        "caption": "Soul King Brook",
+        "content": "Brook is the musician of the Straw Hat Pirates and a skilled fencer. He is also a living skeleton due to eating the Revive-Revive Fruit. Brook is a lively and humorous individual who seeks to fulfill a promise made to a whale named Laboon by reuniting with it at the Reverse Mountain.",
+        "hashtags": [
+          "#Soul-powers",
+          "#Musician"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": "2024-08-18T07:25:12.965Z"
+        ,
+        "__v": 0
+      },
+      {
+        "_id": {
+          "$oid": "66c1a2200e4ce882180245c6"
+        },
+        "blog_id": "0e5631a8-a33c-4359-a8fa-779fe517560b",
+        "user_id": "b7b47927-458e-44e4-93d0-2cbac7db3c01",
+        "filePaths": {
+          "images": [
+            "/data/images/bd984680-d23a-49a3-9b5a-c391450ff29a.jpeg"
+          ],
+          "videos": []
+        },
+        "caption": "Knight of the Sea Jinbe",
+        "content": "Jinbe is a Fish-Man and skilled martial artist who practices Fish-Man Karate. He is a former Warlord of the Sea and has a strong sense of justice. Jinbe aims to bring harmony between Fish-Men and humans and create a world where they can coexist in peace.",
+        "hashtags": [
+          "#Fish-Man-Karate",
+          "#Haki"
+        ],
+        "likes": 0,
+        "comments": [],
+        "deleted": false,
+        "date_created": "2024-08-18T07:26:24.679Z"
+        ,
+        "__v": 0
+      }]
+}

@@ -1,0 +1,101 @@
+
+[{   
+"user_id": 7,
+"username": "smith",
+"userImage": "https://example.com/images/jane_doe.jpg",
+"address": "404 Maple St, Anytown, USA",
+"followers": 150,
+"following": 75,
+"posts": 300
+},
+{
+"user_id": 8,
+"username": "john_smith",
+"userImage": "https://example.com/images/john_smith.jpg",
+"address": "505 Oak St, Anytown, USA",
+"followers": 180,
+"following": 90,
+"posts": 400
+},
+{
+"user_id": 9,
+"username": "alice_jones",
+"userImage": "https://example.com/images/alice_jones.jpg",
+"address": "606 Pine St, Anytown, USA",
+"followers": 200,
+"following": 100,
+"posts": 450
+},
+{
+"user_id": 10,
+"username": "bob_brown",
+"userImage": "https://example.com/images/bob_brown.jpg",
+"address": "707 Birch St, Anytown, USA",
+"followers": 250,
+"following": 125,
+"posts": 550
+},
+{
+"user_id": 11,
+"username": "carol_white",
+"userImage": "https://example.com/images/carol_white.jpg",
+"address": "808 Cedar St, Anytown, USA",
+"followers": 300,
+"following": 150,
+"posts": 600
+},
+{
+"user_id": 12,
+"username": "dave_black",
+"userImage": "https://example.com/images/dave_black.jpg",
+"address": "909 Maple St, Anytown, USA",
+"followers": 350,
+"following": 175,
+"posts": 650
+},
+{
+"user_id": 13,
+"username": "eve_green",
+"userImage": "https://example.com/images/eve_green.jpg",
+"address": "1010 Oak St, Anytown, USA",
+"followers": 400,
+"following": 200,
+"posts": 700
+},
+{
+"user_id": 14,
+"username": "frank_gray",
+"userImage": "https://example.com/images/frank_gray.jpg",
+"address": "1111 Pine St, Anytown, USA",
+"followers": 450,
+"following": 225,
+"posts": 750
+},
+{
+"user_id": 15,
+"username": "grace_blue",
+"userImage": "https://example.com/images/grace_blue.jpg",
+"address": "1212 Birch St, Anytown, USA",
+"followers": 500,
+"following": 250,
+"posts": 800
+},
+{
+"user_id": 16,
+"username": "henry_yellow",
+"userImage": "https://example.com/images/henry_yellow.jpg",
+"address": "1313 Cedar St, Anytown, USA",
+"followers": 550,
+"following": 275,
+"posts": 850
+},
+{
+"user_id": 17,
+"username": "irene_purple",
+"userImage": "https://example.com/images/irene_purple.jpg",
+"address": "1414 Maple St, Anytown, USA",
+"followers": 600,
+"following": 300,
+"posts": 900
+}
+]
