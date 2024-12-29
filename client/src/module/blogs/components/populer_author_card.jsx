@@ -25,8 +25,10 @@ const PopularAuthorCard = ({ author_id }) => {
                     });
                     if (response.ok) {
                         const data = await response.json();
-                        setBlogsData(data.data.blogs_data)
-                        setAuthorData(data.data.user_data)
+                        console.log(data);
+                        
+                        setBlogsData(data.writer_data.data)
+                        setAuthorData(data.user_data.data)
                         
                     } else {
                         console.error("Failed to fetch blog data.");

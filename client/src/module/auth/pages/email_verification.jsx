@@ -37,7 +37,6 @@ const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataConte
     }
 
     try {
-      // Make POST request to verify the code
       const response = await fetch(`${api_url}/auth/verification`, {
         method: 'POST',
         headers: {

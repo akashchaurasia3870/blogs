@@ -45,7 +45,7 @@ const Users = () => {
 
     const getUsers = async () => {        
 
-             fetch(`${api_url}/users/get_users`, {
+             fetch(`${api_url}/users/get_users_info`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

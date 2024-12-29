@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
-import { v4 as uuidv4 } from 'uuid';
 
 const commentSchema = new mongoose.Schema({
     comment_id: {
         type: String,
-        default: uuidv4()
+        required:true
     },
     user_id: {
         type: String,
@@ -26,10 +25,6 @@ const commentSchema = new mongoose.Schema({
 });
 
 const likesSchema = new mongoose.Schema({
-    like_id: {
-        type: String,
-        default: uuidv4()
-    },
     user_id: {
         type: String,
         required: true
@@ -44,8 +39,8 @@ const likesSchema = new mongoose.Schema({
         default: Date.now
     },
     deleted: {
-        type: Boolean,
-        default: false
+        type: Number,
+        default: 0
     }
 });
 
@@ -67,7 +62,7 @@ const locationSchema = new mongoose.Schema({
 const blogSchema = new mongoose.Schema({
     blog_id: {
         type: String,
-        default: uuidv4()
+        required:true
     },
     user_id: {
         type: String,

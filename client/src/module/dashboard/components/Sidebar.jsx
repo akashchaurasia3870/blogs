@@ -30,8 +30,8 @@ const Sidebar = ({ onMenuItemClick }) => {
         'Notifications': <IoNotificationsSharp />,
         // 'Reports': <MdOutlineReportGmailerrorred />,
         'Mails': <IoMail />,
-        'Accounts': <IoSettingsOutline />,
-        'Settings': <MdAccountCircle />,
+        'Accounts': < MdAccountCircle />,
+        'Settings': <IoSettingsOutline />,
     }
 
     let handleMenuChange = (isShow) => {

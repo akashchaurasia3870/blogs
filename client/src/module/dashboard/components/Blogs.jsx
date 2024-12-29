@@ -77,7 +77,7 @@ const Blogs = () => {
 
     const getBlogs = async ()=>{
 
-        fetch(`${api_url}/blogs/get_blogs`,
+        fetch(`${api_url}/blogs/get_blogs_info`,
             {
                 method: "POST",
                 headers: {

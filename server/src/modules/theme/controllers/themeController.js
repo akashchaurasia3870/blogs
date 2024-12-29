@@ -28,7 +28,7 @@ const createTheme = async (user_id) => {
     }
 };
 
-const updateTheme = async (user_id , updatedValues) => {
+const updateThemeInfo = async (user_id , updatedValues) => {
     try {
         
         const updatedTheme = await Theme.findOneAndUpdate(
@@ -47,7 +47,7 @@ const updateTheme = async (user_id , updatedValues) => {
     }
 };
 
-const getTheme = async (user_id ) => {
+const getThemeInfo = async (user_id ) => {
     try {
         // Find the theme by user_id and update the provided fields
         const theme = await Theme.findOne({ theme_user_id: user_id });
@@ -56,7 +56,7 @@ const getTheme = async (user_id ) => {
         if (!theme) {
             // throw new Error('Theme not found for the specified user.');
             await createTheme(user_id)
-            theme = await getTheme(user_id)
+            theme = await getThemeInfo(user_id)
         }
 
         return theme;
@@ -65,16 +65,16 @@ const getTheme = async (user_id ) => {
     }
 };
 
-const checkTheme = async (user_id ) => {
+const deleteThemeInfo = async (user_id ) => {
     try {
         // Find the theme by user_id and update the provided fields
         const theme = await Theme.findOne({ theme_user_id: user_id });
 
 
         if (!theme) {
-            throw new Error('Theme not found for the specified user.');
+            // throw new Error('Theme not found for the specified user.');
             await createTheme(user_id)
-            theme = await getTheme(user_id)
+            theme = await getThemeInfo(user_id)
         }
 
         return theme;
@@ -83,10 +83,9 @@ const checkTheme = async (user_id ) => {
     }
 };
 
-
-
 export {
-    updateTheme,
+    updateThemeInfo,
     createTheme,
-    getTheme,
+    getThemeInfo,
+    deleteThemeInfo
 };

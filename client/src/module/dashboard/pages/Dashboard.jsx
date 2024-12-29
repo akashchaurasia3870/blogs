@@ -30,7 +30,7 @@ const Dashboard = () => {
             case 'Settings':
                 return <Settings />;
             case 'Accounts':
-                return <Accounts />;
+                return <Profile />;
             default:
                 return <Home />;
         }

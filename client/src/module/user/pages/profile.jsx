@@ -21,7 +21,7 @@ const Profile = () => {
 
 
 
-            const response = await fetch(`${api_url}/users/get_user`, {
+            const response = await fetch(`${api_url}/users/get_user_info`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -35,8 +35,11 @@ const Profile = () => {
                 email: data.data?.email,
                 password: data.data?.password,
                 blogsNo: 0,
-                mobileNo: data.data?.phone,
-                address: data.data?.address.country,
+                phone: data.data?.phone,
+                country: data.data?.address.country,
+                state: data.data?.address.state,
+                city: data.data?.address.city,
+                pincode: data.data?.address.pincode,
                 userImage: data.data?.userImage,
             }
             setImageUrl(api_url + data_c.userImage);
@@ -116,27 +119,74 @@ const Profile = () => {
 
     };
 
+    // function getNonMatchingKeys(obj1, obj2) {
+    //     const result = {};
+      
+    //     for (const key in obj1) {
+    //       // Check if obj1 has the key and it doesn't match with obj2
+    //       if (obj1[key] !== obj2[key]) {
+    //         result[key] = obj1[key]; // Add the differing value from obj1 to the result
+    //       }
+    //     }
+      
+    //     return result;
+    // }
+
+    function transformAndCompare(obj1, obj2) {
+        const result = {};
+        const addressKeys = ["city", "state", "pincode", "country"];
+        const address = {};
+      
+        for (const key in obj1) {
+          if (addressKeys.includes(key)) {
+            // Compare and add to address if the value differs or is relevant
+            if (obj1[key] !== obj2[key]) {
+              address[key] = obj1[key];
+            }
+          } else {
+            // Add to result if the value differs
+            if (obj1[key] !== obj2[key]) {
+              result[key] = obj1[key];
+            }
+          }
+        }
+      
+        // Only add address to result if it has any differences
+        if (Object.keys(address).length > 0) {
+          result.address = address;
+        }
+      
+        return result;
+      }
+
     // Update user details
     const updateUserDetails = async () => {
         try {
-            let url = api_url + '/users/update_user';
+            let url = api_url + '/users/update_user_info';
+
+            console.log(profileData);
+            console.log(originalData);
+
+            const update_feilds = transformAndCompare(profileData, originalData);
+            console.log(update_feilds);
+
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": localStorage.getItem("token"),
                 },
-                body: JSON.stringify(profileData),
+                body: JSON.stringify({"update_feilds":update_feilds}),
             });
             if (response.ok) {
                 let data_c = {
                     username: response.data?.username,
                     email: response.data?.email,
-                    password: response.data?.password,
-                    blogsNo: 0,
-                    mobileNo: response.data?.phone,
-                    address: response.data?.address.country,
-                    userImage: response.data?.userImage,
+                    phone: response.data?.phone,
+                    country: response.data?.address.country,
+                    state: response.data?.address.state,
+                    city: response.data?.address.city,
+                    pincode: response.data?.address.pincode,                    userImage: response.data?.userImage,
                 }
                 setProfileData(data_c);
                 setOriginalData(data_c);
@@ -189,7 +239,7 @@ const Profile = () => {
                                     value={profileData.username}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
                                 />
                             </div>
                             <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
@@ -201,31 +251,7 @@ const Profile = () => {
                                     value={profileData.email}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                />
-                            </div>
-                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
-                            >
-                                <label className="block ">Password:</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={profileData.password}
-                                    onChange={handleChange}
-                                    disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                />
-                            </div>
-                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
-                            >
-                                <label className="block ">Number of Blogs:</label>
-                                <input
-                                    type="number"
-                                    name="blogsNo"
-                                    value={profileData.blogsNo}
-                                    onChange={handleChange}
-                                    disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
                                 />
                             </div>
                             <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
@@ -233,25 +259,73 @@ const Profile = () => {
                                 <label className="block ">Mobile No:</label>
                                 <input
                                     type="text"
-                                    name="mobileNo"
-                                    value={profileData.mobileNo}
+                                    name="phone"
+                                    value={profileData.phone}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
                                 />
                             </div>
-                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+
+                            <div
+                            className="input_container p-5 rounded-lg"
+                            style={{ backgroundColor: theme === "black" ? "#1e293b" : "#e2e8f0" }}
                             >
-                                <label className="block">Address:</label>
-                                <input
+                                <h3 className="text-lg font-semibold mb-3">Address</h3>
+
+                                {/* Street */}
+                                <div className="input_container p-3 rounded-lg mb-3">
+                                    <label className="block">City:</label>
+                                    <input
                                     type="text"
-                                    name="address"
-                                    value={profileData.address}
+                                    name="city"
+                                    value={profileData?.city}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                />
+                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                    />
+                                </div>
+
+                                {/* City */}
+                                <div className="input_container p-3 rounded-lg mb-3">
+                                    <label className="block">State:</label>
+                                    <input
+                                    type="text"
+                                    name="state"
+                                    value={profileData?.state}
+                                    onChange={handleChange}
+                                    disabled={!isEditable}
+                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                    />
+                                </div>
+
+                                {/* Country */}
+                                <div className="input_container p-3 rounded-lg mb-3">
+                                    <label className="block">Country:</label>
+                                    <input
+                                    type="text"
+                                    name="country"
+                                    value={profileData?.country}
+                                    onChange={handleChange}
+                                    disabled={!isEditable}
+                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                    />
+                                </div>
+
+                                {/* Pincode */}
+                                <div className="input_container p-3 rounded-lg">
+                                    <label className="block">Pincode:</label>
+                                    <input
+                                    type="text"
+                                    name="pincode"
+                                    value={profileData?.pincode}
+                                    onChange={handleChange}
+                                    disabled={!isEditable}
+                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                    />
+                                </div>
                             </div>
+
                             <div className="flex space-x-4 mt-4 input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                             >
                                 {isEditable ? (

@@ -16,7 +16,7 @@ const PopularAuthors = () => {
     
     const fetchAuthors = async (limit) => {
         try {
-            const response = await fetch(`${api_url}/users/get_author`,
+            const response = await fetch(`${api_url}/users/get_writer_info`,
                 {
                     method: "POST",
                     headers: {

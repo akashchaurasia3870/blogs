@@ -7,7 +7,6 @@
         "dev": "nodemon server/index.js",
         "build": "npm install && npm install --prefix client && npm run build --prefix client",
         "start": "nodemon server/index.js"
-
     },
     "author": "Akash Chaurasia",
     "license": "ISC",
@@ -24,6 +23,7 @@
         "multer": "^1.4.5-lts.1",
         "nodemailer": "^6.9.13",
         "otp-generator": "^4.0.1",
+        "picocolors": "^1.1.1",
         "uuid": "^9.0.1",
         "vercel": "^39.2.2"
     },

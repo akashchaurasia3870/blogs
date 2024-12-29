@@ -2,7 +2,6 @@
 import React ,{useContext} from 'react';
 import data from '../../../assets/data/data.json';
 import api_url from '../../../utils/utils';
-import PopularAuthorCard from './populer_author_card';
 import { Link } from 'react-router-dom';
 import {BlogDataContext } from '../../../context/Blog_Context';
 

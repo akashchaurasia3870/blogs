@@ -74,7 +74,7 @@ const AddBlog = () => {
         // }
 
         try {
-            const response = await fetch(`${api_url}/blogs/add`, {
+            const response = await fetch(`${api_url}/blogs/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

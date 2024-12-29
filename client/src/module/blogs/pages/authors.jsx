@@ -1,19 +1,21 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import dummy_data from '../../../assets/data/data.json';
 import authors_dummy_data from '../../../assets/data/authos_data.json';
 import img5 from '../../../assets/img/img5.jpg'
 import { Link } from 'react-router-dom';
-import PopularAuthorCard from '../components/populer_author_card';
 import { BlogDataContext } from '../../../context/Blog_Context';
 import Filter from '../../../global_components/filter/filter';
 import UserCard from '../components/user_card';
 import Pagination from '../../../global_components/pagination/pagination';
+import api_url from '../../../utils/utils';
 
 function Authors() {
 
     const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
 
     const [layout, setLayout] = useState(true); // true for grid, false for list
+    const [loading, setLoading] = useState(true); // true for grid, false for list
+
 
     const handleSearch = (searchTerm) => {
         // Handle search logic
@@ -42,10 +44,53 @@ function Authors() {
     });
   
 
-    let [authorData, setAuthorsData] = useState(authors_dummy_data);
+    let [authorData, setAuthorsData] = useState(null);
+
+    useEffect(()=>{
+        const fetchWritersData = async ()=>{
+            try {
+                let response = await fetch(`${api_url}/users/get_users_info`,{
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Authorization":localStorage.getItem("token")
+                    },
+                    body:JSON.stringify({
+                        search:'',
+                        limit:10,
+                        page:1
+                    })
+                })
+    
+                if(response.ok){
+                    const data = await response.json();
+                    console.log(data);
+                    
+                    setAuthorsData(data.data);
+                    setLoading(false)
+
+                }else{
+                    console.error("Failed To Fetch Blog Data");
+                }
+            } catch (error) {
+                console.log("Something Went Wrong : ",error);
+            }finally{
+                setLoading(false)
+            }
+        }
+
+        fetchWritersData();
+    },[setLoading])
 
     const loadData = ()=>{
          alert("Loading More Authors")
+    }
+
+
+    if(authorData==null){
+        return <>
+        <h1>Loading</h1>
+        </>
     }
 
     return (
@@ -64,9 +109,6 @@ function Authors() {
                             <div className='flex flex-row justify-center items-center py-1 rounded-md my-2 mx-2 hover:scale-[1.025] duration-300 ease-in-out'>
                                 <UserCard data={author}/> 
                             </div>
-                            // <Link to={`/blogs/users/${author.id}`} className={`author flex flex-row justify-center items-center py-1 rounded-md my-2 mx-2 hover:scale-[1.025] duration-300 ease-in-out`} >
-                            //     <PopularAuthorCard author={author} />
-                            // </Link>
                         )
                     })}
                 </div>

@@ -28,7 +28,7 @@ const Notification = () => {
 
     const getNotification = async () => {        
 
-             fetch(`${api_url}/notification/get`, {
+             fetch(`${api_url}/admin/get_notifications_info`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const Notification = () => {
             })
             .then((result) => {                
                 setNotifications(result.data)
-                setTotalCount(result.pagination_data.totalCount)
+                setTotalCount(result.pagination_data.totalItems)
                 setTotalPages(result.pagination_data.totalPages)
             })
             .catch((error) => {
@@ -139,8 +139,8 @@ const Notification = () => {
                         <tr key={item.id} 
                         >
                         <td className="px-5 py-5 flex flex-col justify-center items-center">
-                            <img src={api_url+item.user_details.userImage} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
-                            <span>{item.user_details.username}</span>
+                            <img src={api_url+item?.user_details?.userImage} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
+                            <span>{item?.user_details?.username}</span>
                         </td>
                         <td className="px-5 py-5">
                             <p className="whitespace-no-wrap">{item.subject}</p>

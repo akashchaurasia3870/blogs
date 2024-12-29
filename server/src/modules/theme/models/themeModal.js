@@ -28,7 +28,7 @@ const ThemeSchema = new Schema({
     },
     fontWeight: {
         type: String,
-        enum: ['font-light', 'font-normal', 'font-semibold', 'font-bold'], // Example values, add more if needed
+        enum: ['font-light', 'font-normal', 'font-semibold', 'font-bold'], // Example values, create more if needed
         default: 'font-normal',
         required: true
     },

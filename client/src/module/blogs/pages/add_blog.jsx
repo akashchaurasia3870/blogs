@@ -115,7 +115,7 @@ const AddBlog = () => {
         e.preventDefault();
 
         try {
-            let url = `${api_url}/blogs/add`;
+            let url = `${api_url}/blogs/create`;
 
             blogData.images = blogData.images_url;
             blogData.videos = blogData.videos_url;
@@ -172,7 +172,7 @@ const AddBlog = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter the title of your blog"
-                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg2 p-3"
+                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg-gray-400 p-3"
                         />
                     </div>
                     <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
@@ -183,7 +183,7 @@ const AddBlog = () => {
                             value={blogData.caption}
                             onChange={handleChange}
                             placeholder="e.g., An unforgettable journey through the mountains."
-                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg2 p-3"
+                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg-gray-400 p-3"
                         />
                     </div>
                     <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
@@ -194,7 +194,7 @@ const AddBlog = () => {
                             value={blogData.hashtags}
                             onChange={handleChange}
                             placeholder="e.g., #Travel #Adventure #Nature"
-                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg2 p-3"
+                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg-gray-400 p-3"
                         />
                     </div>
                     <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
@@ -206,7 +206,7 @@ const AddBlog = () => {
                             rows="10"
                             required
                             placeholder="Write the content of your blog..."
-                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg2 p-3"
+                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg-gray-400 p-3"
                         ></textarea>
                     </div>
 

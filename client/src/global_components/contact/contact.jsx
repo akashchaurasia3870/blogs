@@ -30,7 +30,7 @@ function Contact() {
             return;
         }
 
-             fetch(`${api_url}/notification/send`, {
+             fetch(`${api_url}/mail/send`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

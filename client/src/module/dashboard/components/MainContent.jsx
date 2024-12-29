@@ -40,7 +40,7 @@ const MainContent = ({ activePage,onMenuItemClick }) => {
             // case 'Reports':
                 // return <Reports />;
             case 'Accounts':
-                return <Accounts />;
+                return <Profile />;
             default:
                 return <Home menuChange={onMenuItemClick} />;
         }

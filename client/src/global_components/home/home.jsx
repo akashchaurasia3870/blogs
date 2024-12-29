@@ -95,7 +95,7 @@ function Home() {
     
     useEffect(() => {
 
-        let url = `${api_url}/blogs/get`;
+        let url = `${api_url}/blogs/get_blogs_home`;
 
         fetch(url,
             {
@@ -105,7 +105,6 @@ function Home() {
                     "Authorization": localStorage.getItem("token"),
                 },
                 body: JSON.stringify(filter_data),
-
             }
         )
         .then(response => {
@@ -116,31 +115,33 @@ function Home() {
         })
         .then(data => {            
 
-            setBlogsData(data.data);
-            setSimilierData(data.data_c.category_blog);
-            setTrandingData(data.data_c.trending_blog);
-            setAuthorsData(data.data_c.trending_author);
-            setFontStyle(data.data_c.theme_data.fontColor);
-            setFontSize(data.data_c.theme_data.fontSize);
-            setFontWeight(data.data_c.theme_data.fontWeight);
-            setTheme(data.data_c.theme_data.theme);
+            setBlogsData(data.blogs_data.data);
+            setSimilierData(data.similier_data);
+            setTrandingData(data.trending_data);
+            setAuthorsData(data.writer_data);
+            setFontStyle(data.theme_data.fontColor);
+            setFontSize(data.theme_data.fontSize);
+            setFontWeight(data.theme_data.fontWeight);
+            setTheme(data.theme_data.theme);
             if(data.theme=='white'){
                 setTheme2('200');
             }else{
                 setTheme2('800');
             }
-            setBackgroundImage(data.data_c.backgroundStyle)
+            setBackgroundImage(data.theme_data.backgroundStyle)
 
             setTimeout(() => {
                 setIsLoading(false);
             }, 2000)
         })
         .catch(error => {
+            console.log(error);
+            
             setTimeout(() => {
                 setIsLoading(false);
             }, 2000)
         
-            localStorage.removeItem("token");
+            // localStorage.removeItem("token");
             navigate('/signin');
         });
     }, [filter_data]);

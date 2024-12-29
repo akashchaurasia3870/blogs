@@ -200,7 +200,7 @@ const Mails = () => {
         setMassEmailOpen(false);
     };
 
-    const filteredMails = mails_cstm
+    const filteredMails = mails
     .filter((mail) =>
         mail.subject.toLowerCase().includes(search.toLowerCase()) ||
         mail.username.toLowerCase().includes(search.toLowerCase())
@@ -216,7 +216,7 @@ const Mails = () => {
 
     const getMails = async () => {        
 
-                fetch(`${api_url}/mails/get`, {
+                fetch(`${api_url}/admin/get_mails_info`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -249,9 +249,9 @@ const Mails = () => {
     };
 
         
-    // useEffect(()=>{
-    //     getMails()
-    // },[pages,sortBy,sortOrder,search])
+    useEffect(()=>{
+        getMails()
+    },[pages,sortBy,sortOrder,search])
     
 
     return (

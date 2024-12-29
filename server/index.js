@@ -6,7 +6,6 @@ import { connectToMongoDB } from './src/connections/mongodbconnection.js'
 import userRouter from './src/modules/users/routes/userRoutes.js';
 import themeRouter from './src/modules/theme/routes/themeRoutes.js';
 import blogRouter from './src/modules/blogs/routes/blogRoutes.js';
-import chatRouter from './src/modules/chat/routes/chatRoutes.js';
 import adminRouter from './src/modules/admin/routes/adminRoutes.js';
 import notificationRouter from './src/modules/notification/routes/notificationRoutes.js';
 import mailRouter from './src/modules/mails/routes/mailsRoutes.js';
@@ -18,7 +17,8 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 const corsOptions = {
-    origin: 'https://blogs-160e.onrender.com/',
+    // origin: 'https://blogs-160e.onrender.com/',
+    origin: '*',
     credentials: true,
     optionSuccessStatus: 200,
 }
@@ -87,7 +87,6 @@ app.post('/upload', (req, res) => {
 
 app.use('/users', userRouter);
 app.use('/blogs', authMiddleware, blogRouter);
-app.use('/chats', authMiddleware, chatRouter);
 app.use('/theme', authMiddleware, themeRouter);
 app.use('/mail', authMiddleware, mailRouter);
 app.use('/notification', authMiddleware, notificationRouter);

@@ -1,13 +1,12 @@
 import CustomError from '../../../customErrors/CustomError.js'
 import { Notification } from '../models/notificationModel.js';
-
-import { getTheme } from '../../theme/controllers/themeController.js';
 import User from '../../users/models/userModal.js';
+import { svc_deleteNotificationInfo, svc_getNotificationsInfo, svc_updateNotificationInfo } from '../services/notificationService.js';
 
 async function sendNotification(req) {
     try {        
         
-        let {message,subject,email,user_id} = req.body;
+        let {message,subject,eNotification,user_id} = req.body;
 
         let newNotifications = new Notification({
             subject,
@@ -154,4 +153,55 @@ async function getNotificationsById(req) {
     }
 }
 
-export { getNotifications, sendNotification, sendMassNotification,getNotificationsById,replyNotification };
+async function getReportsInfo(search,limit,page){ 
+    try {
+        let result  = await svc_getNotificationsInfo(limit,page,search)
+        return result;
+    } catch (error) {
+        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+    } 
+}
+
+async function updateReportInfo(user_id,report_id,update_feilds){  
+    try {
+        let result  = await svc_updateNotificationInfo(user_id,report_id,update_feilds)
+        return result;
+    } catch (error) {
+        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+    }
+}
+async function deleteReportInfo(user_id,report_id){  
+    try {
+        let result  = await svc_deleteNotificationInfo(user_id,report_id)
+        return result;
+    } catch (error) {
+        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+    }
+}
+
+async function getNotificationsInfo(limit,pages,search){ 
+    try {
+        let result  = await svc_getNotificationsInfo(limit,pages,search)
+        return result;
+    } catch (error) {
+        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+    } 
+}
+async function updateNotificationInfo(user_id,notification_id,update_feilds){  
+    try {
+        let result  = await svc_updateNotificationInfo(user_id,notification_id,update_feilds)
+        return result;
+    } catch (error) {
+        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+    }
+}
+async function deleteNotificationInfo(user_id,notification_id){
+    try {
+        let result  = await svc_deleteNotificationInfo(user_id,notification_id)
+        return result;
+    } catch (error) {
+        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+    }  
+}
+
+export { getNotifications,sendNotification,sendMassNotification,getNotificationsById,replyNotification,deleteReportInfo,updateReportInfo,getReportsInfo,getNotificationsInfo,updateNotificationInfo,deleteNotificationInfo };

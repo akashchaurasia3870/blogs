@@ -13,6 +13,10 @@ export const authMiddleware = async (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+        // console.log("token verification :", decoded.user_id);
+        // console.log(typeof decoded.user_id);
+        
         req.body.user_id = decoded.user_id;
 
         let userCount = await User.countDocuments({ user_id: decoded.user_id })

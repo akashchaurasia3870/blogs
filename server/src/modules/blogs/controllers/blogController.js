@@ -1,353 +1,200 @@
 import CustomError from '../../../customErrors/CustomError.js'
 import { Comment, Location, Blog, Likes } from '../models/blogModel.js';
 
-import { getTheme } from '../../theme/controllers/themeController.js';
+import { getThemeInfo } from '../../theme/controllers/themeController.js';
 import User from '../../users/models/userModal.js';
+import {
+    svc_bookmarkBlog,
+    svc_getBlogComments,
+    svc_createBlogComment,
+    svc_toggleLike,
+    svc_toggleFollow,
+    svc_deleteBlogInfo,
+    svc_updateBlogInfo,
+    svc_getTradingAuthor,
+    svc_getTrandingBlogs,
+    svc_getSimilerBlogs,
+    svc_getWritersBlogsData,
+    svc_getBlogsInfo,
+    svc_getBlogInfo,
+    svc_createBlog} from '../services/blogService.js'
+import { getUserDetails } from '../../users/controllers/userController.js';
 
-async function addPost(data) {
-    try {
-
-        let { user_id, images, videos, caption, hashtags, content } = data;
-        let newPost = new Blog({
-            user_id,
-            filePaths: { "images": images, "videos": videos },
-            caption,
-            content,
-            hashtags: hashtags.split(',')
-        })
-
-        await newPost.save();
-
-        return { message: 'New Blog Added Successfully', success: true, statusCode: 201 };
-
-    } catch (error) {
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
-    }
-}
-
-async function getPostById(req) {
-    try {
-       
-        let { author_id } = req.body;
-
-        const filter = { user_id : author_id};
-        const blogs_data = await Blog.find(filter, { projection: { comments: 0, deleted: 0, _id: 0 } });
-        
-        const user_data = await User.findOne(filter);
-        
-        return { message: 'User Posts', success: true, statusCode: 200, data: {blogs_data,user_data} }
-
-    } catch (error) {
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
-    }
-}
-async function getPost(req) {
-    try {
-        let { search ,option } = req.body;
-        
-
-        // const filter = { user_id };
-        // const blogs = await Blog.find({}, { projection: { comments: 0, deleted: 0, _id: 0 } });
-
-        option = 'date_created'; // or 'likes', based on the sorting option
-
-        const sortOptions = {
-            date_created: -1, // Default descending order
-            likes: -1         // Default descending order
-        };
-
-        // Build the $sort stage based on the option
-        const sortStage = {
-            [option]: sortOptions[option] || -1 // Fallback to descending order if option is not valid
-        };
-
-        const blogs = await Blog.aggregate([
-            {
-                $match: {
-                    $or: [
-                        { caption: { $regex: search, $options: 'i' } },
-                        // { content: { $regex: search, $options: 'i' } },
-                        { hashtag: { $regex: search, $options: 'i' } }
-                    ]
-                }
-            },
-            {
-                $project: {
-                    comments: 0,
-                    deleted: 0,
-                    _id: 0
-                }
-            },
-            {
-                $sort: sortStage
-            }
-        ]);        
-
-        const category_blog = await getSimilerBlogs();
-        const trending_blog = await getTrandingBlogs();
-        const trending_author = await getTradingAuthor();
-        const theme_data = await getTheme(req.body.user_id);
-
-        return { message: 'User Posts', success: true, statusCode: 200, data: blogs , data_c : {category_blog,trending_blog,trending_author,theme_data} }
-
-    } catch (error) {
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
-    }
-}
-async function getBlogs(req) {
+async function createBlog(user_id, images, videos, caption, hashtags, content) {
     try {
         
-        let {limit,pages,search,sort,sort_order} = req.body;
+        const result = await svc_createBlog(user_id, images, videos, caption, hashtags, content);
+        return result ;
+
+    } catch (error) {
+        throw new CustomError('Error Occured During svc_createBlog Process : '+error.message, error.statusCode || 500);
+    }
+}
+
+async function getBlogsHomeInfo(user_id) {
+    try {   
+        const blogs_data = await getBlogsInfo();
+        const trending_data = await getTrandingBlogs();
+        const similier_data = await getSimilerBlogs();
+        const writer_data = await getTradingAuthor();
+        const theme_data = await getThemeInfo(user_id);
+        return {
+            blogs_data,trending_data,similier_data,writer_data,theme_data
+        } ;
+    } catch (error) {
+        throw new CustomError('Error Occured During SignUp Process : '+error.message, error.statusCode || 500);
+    }
+}
+async function getPostsByWriterId(user_id) {
+    try {   
+        const user_data = await getUserDetails(user_id);
+        const writer_data = await getWritersBlogsData(10,1,'',user_id);
+
+        return {
+            user_data,writer_data
+        } ;
+    } catch (error) {
+        throw new CustomError('Error Occured During SignUp Process : '+error.message, error.statusCode || 500);
+    }
+}
+async function getBlogInfo(user_id,blog_id) {
+    try {   
+        const result = await svc_getBlogInfo(user_id,blog_id);
+        return result ;
+    } catch (error) {
+        throw new CustomError('Error Occured During SignUp Process : '+error.message, error.statusCode || 500);
+    }
+}
+
+async function getBlogsInfo(limit=10,page=1,search='') {
+    try {
         
-
-        const filter = { 
-            deleted:'0'
-        };
-
-        if(search!=''){
-            filter = { 
-                deleted:'0' ,
-                $or: [
-                    { title: { $regex: search, $options: 'i' } }, // Case-insensitive search on title
-                    { content: { $regex: search, $options: 'i' } } // Case-insensitive search on content
-                ]
-            };
-        }
-
-
-        const totalItems = await Blog.countDocuments(filter);
-
-        const totalPages = Math.ceil(totalItems / limit); // ceil to ensure rounding up
-
-        // Ensure the page is within bounds
-        pages = Math.max(1, Math.min(pages, totalPages)); // Page can't be less than 1 or more than totalPages
-
-        // Calculate the number of items to skip based on the current page
-        const skip = (pages - 1) * limit;
-
-
-        const blogs = await Blog.aggregate([
-            {
-                $match: {
-                    $or: [
-                        { caption: { $regex: search, $options: 'i' } },
-                        // { content: { $regex: search, $options: 'i' } },
-                        { hashtag: { $regex: search, $options: 'i' } }
-                    ]
-                }
-            },
-            {
-                $project: {
-                    comments: 0,
-                    deleted: 0,
-                    _id: 0
-                }
-            }
-        ]).sort({ [sort]: sort_order === 'asc' ? 1 : -1 })
-        .skip(skip)
-        .limit(limit);
-
-        let pagination_data = {
-            currentPage: pages,
-            totalPages: totalPages,
-            totalItems: totalItems
-        }
-
-        return { message: 'Blogs Data', success: true, statusCode: 200, data: blogs ,pagination_data}
+        const result = await svc_getBlogsInfo(limit,page,search);
+        return result ;
 
     } catch (error) {
-        console.log(error.message);
+        throw new CustomError('Error Occured During SignUp Process : '+error.message, error.statusCode || 500);
+    }
+}
+
+async function getWritersBlogsData(limit=10,page=1,search='',user_id='') {
+    try {
         
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
-    }
-}
-
-async function getSimilerBlogs(category='') {
-    try {
-
-        const blogs = await Blog.aggregate([
-            // {
-            //     $match: {
-            //         category: { $regex: category, $options: 'i' }
-            //     }
-            // },
-            {
-                $project: {
-                    comments: 0,
-                    deleted: 0,
-                    _id: 0
-                }
-            },
-            {
-                $sort: { date_created: -1 }
-            },
-            {
-                $limit: 7
-            }
-        ]);
-
-        return blogs ;
-    } catch (error) {
-        throw new CustomError(error.message || 'Error fetching similar blogs', error.statusCode || 500);
-    }
-}
-
-async function getTrandingBlogs() {
-    try {
-        const blogs = await Blog.aggregate([
-            {
-                $project: {
-                    comments: 0,
-                    deleted: 0,
-                    _id: 0
-                }
-            },
-            {
-                $sort: { likes: -1 }
-            },
-            {
-                $limit: 7
-            }
-        ]);
-
-        return blogs ;
-    } catch (error) {
-        throw new CustomError(error.message || 'Error fetching trending blogs', error.statusCode || 500);
-    }
-}
-
-async function getTradingAuthor() {
-    try {
-        const authors = await Blog.aggregate([
-            {
-                $sort: { likes: -1 }
-            },
-            {
-                $limit: 7
-            }
-        ]);
-
-        return  authors ;
-    } catch (error) {
-        throw new CustomError(error.message || 'Error fetching trending authors', error.statusCode || 500);
-    }
-}
-
-
-async function updatePost(data) {
-    try {
-        let { user_id, blog_id, caption } = data;
-        const filter = { user_id, blog_id };
-        const update = { $set: { caption } };
-        const blogs = await Blog.updateOne(filter, update);
-        return { message: 'Blog Updated Successfully' };
+        const result = await svc_getWritersBlogsData(limit,page,search,user_id);
+        return result ;
 
     } catch (error) {
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+        throw new CustomError('Error Occured During SignUp Process : '+error.message, error.statusCode || 500);
     }
 }
 
-async function deletePost(data) {
+async function getSimilerBlogs(limit=10,page=1,search='') {
     try {
-
-        let { user_id, blog_id } = data;
-        const filter = { user_id, blog_id };
-        const update = { $set: { deleted: true } };
-        const blogs = await Blog.updateOne(filter, update);
-        return { message: 'Blog Updated Successfully' };
+        
+        const result = await svc_getSimilerBlogs(limit,page,search);
+        return result ;
 
     } catch (error) {
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+        throw new CustomError('Error Occured During SignUp Process : '+error.message, error.statusCode || 500);
     }
 }
-async function deleteLike(data) {
+
+async function getTrandingBlogs(limit=10,page=1,search='') {
     try {
-
-        let { user_id, blog_id } = data;
-        let filter = { user_id, blog_id };
-        const update = { $set: { deleted: true } };
-        const like = await Likes.updateOne(filter, update);
-
-
-        filter = { blog_id };
-        // const update = { $set: { comment: comment.push(newComments.comment_id) } };
-        const blog = await Blog.findOne(filter);
-
-        if (!blog) {
-            return { message: 'Blog Not Found' };
-        }
-
-        blog.likes--;
-        const updatedPost = await blog.save();
-
-        return { message: 'Delete Like Successfully' };
+        
+        const result = await svc_getTrandingBlogs(limit,page,search);
+        return result ;
 
     } catch (error) {
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+        throw new CustomError('Error Occured During SignUp Process : '+error.message, error.statusCode || 500);
     }
 }
 
-async function addLikes(data) {
+async function getTradingAuthor(limit=10,page=1,search='') {
     try {
-
-        let { user_id, blog_id } = data;
-        const newlike = new Likes({
-            user_id, blog_id
-        });
-
-        await newlike.save();
-
-        const filter = { blog_id };
-        // const update = { $set: { comment: comment.push(newComments.comment_id) } };
-        const blog = await Blog.findOne(filter);
-
-        if (!blog) {
-            return { message: 'Blog Not Found' };
-        }
-
-        blog.likes++;
-        const updatedPost = await blog.save();
-
-        return { message: 'Update Like Successfully' };
+        
+        const result = await svc_getTradingAuthor(limit,page,search);
+        return result ;
 
     } catch (error) {
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+        throw new CustomError('Error Occured During svc_getTradingAuthor Process : '+error.message, error.statusCode || 500);
     }
 }
 
-async function addComment(data) {
+async function updateBlogInfo(user_id,blog_id,updated_fields) {
     try {
-
-        let { user_id, blog_id, comment } = data;
-
-        const newComments = new Comment({
-            user_id, blog_id, comment
-        });
-
-        await newComments.save();
-
-        let comment_id = newComments.comment_id;
-
-        const filter = { blog_id };
-        // const update = { $set: { comment: comment.push(newComments.comment_id) } };
-        const blog = await Blog.findOne(filter);
-
-        if (!blog) {
-            return { message: 'Blog Not Found' };
-        }
-
-        blog.comments.push(comment_id);
-
-        const updatedPost = await blog.save();
-
-        return { message: 'Comment Added Successfully', blog: updatedPost };
+        
+        const result = await svc_updateBlogInfo(user_id,blog_id);
+        return result ;
 
     } catch (error) {
-        throw new CustomError(error.message || 'Error signing up user', error.statusCode || 500);
+        throw new CustomError('Error Occured During svc_updateBlogInfo Process : '+error.message, error.statusCode || 500);
+    }
+}
+
+async function deleteBlogInfo(user_id,blog_id) {
+    try {
+        
+        const result = await svc_deleteBlogInfo(user_id,blog_id);
+        return result ;
+
+    } catch (error) {
+        throw new CustomError('Error Occured During SignUp Process : '+error.message, error.statusCode || 500);
+    }
+}
+
+async function toggleLike(user_id,blog_id) {
+    try {
+        
+        const result = await svc_toggleLike(user_id, blog_id);
+        return result ;
+
+    } catch (error) {
+        throw new CustomError('Error Occured During svc_toggleLike Process : '+error.message, error.statusCode || 500);
+    }
+}
+async function toggleFollow(user_id,blog_id) {
+    try {
+        
+        const result = await svc_toggleFollow(user_id, blog_id);
+        return result ;
+
+    } catch (error) {
+        throw new CustomError('Error Occured During svc_toggleLike Process : '+error.message, error.statusCode || 500);
+    }
+}
+
+async function getBlogComments(user_id,blog_id) {
+    try {     
+        const result = await svc_getBlogComments(user_id, blog_id);
+        return result ;
+
+    } catch (error) {
+        throw new CustomError('Error Occured During svc_createBlogComment Process : '+error.message, error.statusCode || 500);
+    }
+}
+async function createBlogComment(user_id,blog_id,comment_data) {
+    try {     
+        const result = await svc_createBlogComment(user_id, blog_id , comment_data);
+        return result ;
+
+    } catch (error) {
+        throw new CustomError('Error Occured During svc_createBlogComment Process : '+error.message, error.statusCode || 500);
+    }
+}
+
+async function bookmarkBlog(user_id,blog_id) {
+    try {
+        
+        const result = await svc_bookmarkBlog(user_id,blog_id);
+        return result ;
+
+    } catch (error) {
+        throw new CustomError('Error Occured During svc_bookmarkBlog Process : '+error.message, error.statusCode || 500);
     }
 }
 
 
 
 
-export { addPost, getPost, deletePost, updatePost, addComment, addLikes, deleteLike,getPostById,getBlogs };
+export { createBlog, getBlogInfo, getBlogsInfo, getWritersBlogsData, getSimilerBlogs, getTrandingBlogs, getTradingAuthor,updateBlogInfo,deleteBlogInfo,toggleLike,toggleFollow,getBlogComments,createBlogComment,bookmarkBlog,getBlogsHomeInfo,getPostsByWriterId };

@@ -4,7 +4,9 @@ import api_url from "../../../utils/utils";
 import { Link } from "react-router-dom";
 const UserCard = ({data}) => {
 
-    data.user_id = 'b7b47927-458e-44e4-93d0-2cbac7db3c01'
+  console.log(data);
+  
+    // data.user_id = 'b7b47927-458e-44e4-93d0-2cbac7db3c01'
     const [toggleFollow,setToggleFollow] = useState(data?.follow||true)    
 
     const followHandler = async (following_id) => {
@@ -42,21 +44,21 @@ const UserCard = ({data}) => {
       <p className="mt-1 md:mt-2 lg:mt-4 font-bold">
         {(data?.username).replaceAll('_',"")}<span className="text-blue-500">✔</span>
       </p>
-      <p className="{`text-${fontColor}-500">{data?.address}</p>
+      <p className={`text-${fontColor}-500`}>{data?.address?.country}</p>
       
 
       {/* Stats */}
       <div className="flex items-center justify-around md:justify-between mt-2 md:mt-4 lg:mt-6 font-semibold text-${fontColor}-700">
         <div className="text-center hidden md:block">
-          <p>{data?.posts}</p>
+          <p>{data?.blogs_count}</p>
           <p className={`text-${fontColor}-500`}>posts</p>
         </div>
         <div className="text-center">
-          <p>{data?.followers}</p>
+          <p>{data?.followers_list.length}</p>
           <p className={`text-${fontColor}-500`}>followers</p>
         </div>
         <div className="text-center">
-          <p>{data?.following}</p>
+          <p>{data?.following_list.length}</p>
           <p className={`text-${fontColor}-500`}>following</p>
         </div>
       </div>

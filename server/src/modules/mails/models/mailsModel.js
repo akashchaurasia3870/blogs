@@ -25,8 +25,8 @@ const mailSchema = new mongoose.Schema({
         required: false
     },
     subject: {
-        type: Number,
-        default: 0
+        type: String,
+        default: ''
     },
     date_created: {
         type: Date,
