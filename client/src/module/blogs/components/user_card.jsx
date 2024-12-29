@@ -3,8 +3,6 @@ import { BlogDataContext } from "../../../context/Blog_Context";
 import api_url from "../../../utils/utils";
 import { Link } from "react-router-dom";
 const UserCard = ({data}) => {
-
-  console.log(data);
   
     // data.user_id = 'b7b47927-458e-44e4-93d0-2cbac7db3c01'
     const [toggleFollow,setToggleFollow] = useState(data?.follow||true)    

@@ -24,9 +24,7 @@ const PopularAuthorCard = ({ author_id }) => {
                         body:JSON.stringify({author_id:author_id})
                     });
                     if (response.ok) {
-                        const data = await response.json();
-                        console.log(data);
-                        
+                        const data = await response.json();                        
                         setBlogsData(data.writer_data.data)
                         setAuthorData(data.user_data.data)
                         

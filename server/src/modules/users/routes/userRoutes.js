@@ -113,9 +113,7 @@ userRouter.post('/get_users_info', Logs, authMiddleware, async (req, res) => {
 
 userRouter.post('/update_user_info', Logs, authMiddleware, async (req, res) => {
     try {
-        const {user_id,update_feilds} = req.body
-        console.log(req.body);
-        
+        const {user_id,update_feilds} = req.body        
         const result = await updateUserDetails(user_id,update_feilds);
         res.status(200).json(result);
     } catch (error) {

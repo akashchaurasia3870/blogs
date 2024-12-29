@@ -3,8 +3,6 @@ import { BlogDataContext } from "../../../context/Blog_Context";
 import api_url from "../../../utils/utils";
 
 const UserBio = ({author_data}) => {
-
-  console.log(author_data);
   
     let {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext)
   return (

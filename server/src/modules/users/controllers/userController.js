@@ -36,9 +36,7 @@ const signInByGoogle = async (googleuser_id) => {
     try {
         // Implement Google sign-in logic
         return { message: 'User signed in using Google successfully' };
-    } catch (error) {
-        console.log();
-        
+    } catch (error) {        
         throw new CustomError(error.message || 'Error signing in user using Google', error.statusCode || 500);
     }
 };

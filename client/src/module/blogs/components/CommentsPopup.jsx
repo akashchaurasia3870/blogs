@@ -18,9 +18,7 @@ const CommentsPopup = ({ blog_id, onClose }) => {
           body: JSON.stringify({blog_id}),
         });
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        
+        const data = await response.json();        
         setComments(data || []);
       } else {
         console.error("Failed to fetch comments");

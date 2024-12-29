@@ -8,11 +8,9 @@ import User from '../../users/models/userModal.js';
 async function rps_createBlog(user_id, images, videos, caption, hashtags='', content) {
 
     if(hashtags!='' && hashtags!=undefined && hashtags !=null){
-        console.log(hashtags);
         hashtags = hashtags.split(',')
     }
     try {
-        console.log(typeof user_id);
         let newPost = new Blog({
             blog_id:uuidv4(),
             user_id,
@@ -330,27 +328,18 @@ function toggleStringInArray(array, string) {
 async function rps_toggleFollow(user_id,blog_id) {
     try {
 
-        console.log(user_id,blog_id);
-        
-        let blog = await Blog.findOne({blog_id,"deleted":0});
-    
-        console.log("blog_data : ",blog);
-        
+        let blog = await Blog.findOne({blog_id,"deleted":0});        
         let parent_id = blog.user_id ;
         let child_id = user_id ;
 
         let user1 = await User.findOne({user_id:child_id,"deleted":false});
-        console.log("users data : 1",user1);
         let user1_following_list = user1.following_list ;
-        console.log(user1_following_list,parent_id);
         toggleStringInArray(user1_following_list,parent_id);
         await user1.save();
 
 
         let user2 = await User.findOne({user_id:parent_id,"deleted":false});
-        console.log("users data : 2",user2);
         let user2_followers_list = user2.followers_list ;
-        console.log(user2_followers_list,child_id);
         toggleStringInArray(user2_followers_list,child_id);
         await user2.save();
 

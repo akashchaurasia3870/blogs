@@ -56,7 +56,6 @@ const BlogItemDetails = ({ data }) => {
             setLikeStatus(false)
             setLikeCount(likeCount-1)
           }
-          console.log("Like toggled successfully:", data);
           return data; // Return the server's response if needed
         } catch (error) {
           console.error("Network error:", error.message);
@@ -80,7 +79,6 @@ const BlogItemDetails = ({ data }) => {
           }
       
           const data = await response.json(); // Parse the JSON response
-          console.log("bookmark toggled successfully:", data);
           if(!saveStatus){
             setSaveStatus(true)
           }else{
@@ -109,7 +107,6 @@ const BlogItemDetails = ({ data }) => {
           }
       
           const data = await response.json(); // Parse the JSON response
-          console.log("bookmark toggled successfully:", data);
           if(!saveStatus){
             setFollowStatus(true)
           }else{

@@ -73,7 +73,6 @@ const rps_signIn = async (email, user_password) => {
             "_id":0,
             "__v":0
         });
-        console.log(user);
         
         if (!user) {
             return {
@@ -285,7 +284,6 @@ const rps_updateUserDetails = async (user_id,update_feilds) => {
         //     userImage: req.body.userImage,
         // };
 
-        console.log(update_feilds);
         
 
         const updatedUser = await User.findOneAndUpdate(filter, update_feilds, {
@@ -426,10 +424,8 @@ const rps_toogleFollow = async (user_id, follower_id) => {
 
         if (isFollower) {
             user.followers_list = user.followers_list.filter(id => id !== follower_id);
-            console.log(`Removed ${follower_id} from followers_list.`);
         } else {
             user.followers_list.push(follower_id);
-        console.log(`Added ${follower_id} to followers_list.`);
         }
 
         await user.save();
@@ -456,10 +452,8 @@ const rps_toogleFollow = async (user_id, follower_id) => {
 
         if (isFollowing) {
             user.following_list = user.following_list.filter(id => id !== user_id);
-            console.log(`Removed ${user_id} from following_list.`);
         } else {
             user.following_list.push(user_id);
-            console.log(`Added ${user_id} to following_list.`);
         }
 
         await user.save();

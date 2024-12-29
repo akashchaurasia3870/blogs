@@ -35,10 +35,7 @@ function BlogDetails({ data }) {
     useEffect(() => {
         let { blogData } = location.state || {};
         setBlog(blogData)
-    }, [blog_id]);
-
-    console.log(blogData);
-    
+    }, [blog_id]);    
 
     return (
         <section className={`min-h-[80vh] py-8 bg-${theme} text-[13px] sm:text-sm md:text-md lg:text-lg`}>

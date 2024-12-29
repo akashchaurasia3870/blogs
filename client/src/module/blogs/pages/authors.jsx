@@ -63,9 +63,7 @@ function Authors() {
                 })
     
                 if(response.ok){
-                    const data = await response.json();
-                    console.log(data);
-                    
+                    const data = await response.json();                    
                     setAuthorsData(data.data);
                     setLoading(false)
 

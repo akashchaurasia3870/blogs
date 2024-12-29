@@ -163,12 +163,7 @@ const AccountPage = () => {
         try {
             let url = api_url + '/users/update_user_info';
 
-            console.log(profileData);
-            console.log(originalData);
-
             const update_feilds = transformAndCompare(profileData, originalData);
-            console.log(update_feilds);
-
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
