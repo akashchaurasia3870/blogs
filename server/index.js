@@ -17,8 +17,7 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 const corsOptions = {
-    // origin: 'https://blogs-160e.onrender.com/',
-    origin: '*',
+    origin: 'https://blogs-160e.onrender.com/',
     credentials: true,
     optionSuccessStatus: 200,
 }
