@@ -41,7 +41,6 @@ function App() {
             <Route path='blog/:blog_id' element={<BlogDetails />} />
             <Route path='blogs/author/:author_id' element={<AuthorBlogs />} />
             <Route path='blogs/:author_id' element={<AuthorDetails />} />
-            <Route path='blogs/cat/:category' element={<CategoryBlogs />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
            
             <Route path='authors' element={<Author />} />

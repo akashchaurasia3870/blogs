@@ -31,15 +31,15 @@ const UserBio = ({author_data}) => {
         <div className="mt-4 sm:ml-4 flex flex-col items-center justify-center">
           <div className="flex space-x-6 lg:space-x-12">
             <div className="text-center">
-              <p className="font-bold text-xl md:text-2xl lg:text-4xl">{author_data.posts||0}</p>
+              <p className="font-bold text-xl md:text-2xl lg:text-4xl">{author_data?.blogs_count}</p>
               <p className="text-gray-500  text-xl md:text-xl lg:text-2xl">Posts</p>
             </div>
             <div className="text-center">
-              <p className="font-bold text-xl md:text-2xl lg:text-3xl">{author_data.followers||0}</p>
+              <p className="font-bold text-xl md:text-2xl lg:text-3xl">{author_data?.followers_list?.length}</p>
               <p className="text-gray-500 text-xl md:text-xl lg:text-2xl">Followers</p>
             </div>
             <div className="text-center">
-              <p className="font-bold text-xl md:text-2xl lg:text-3xl">{author_data.following||0}</p>
+              <p className="font-bold text-xl md:text-2xl lg:text-3xl">{author_data?.following_list?.length}</p>
               <p className="text-gray-500 text-xl md:text-xl lg:text-2xl">Following</p>
             </div>
           </div>

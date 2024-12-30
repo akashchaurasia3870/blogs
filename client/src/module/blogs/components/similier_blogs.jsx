@@ -2,7 +2,6 @@ import React from 'react';
 import BlogItemDetails from './blog_item_details';
 import api_url from '../../../utils/utils';
 import data from '../../../assets/data/data.json';
-import BlogItem from './blog_item_details';
 const SimiliarBlogs = () => {
 
     let blog_data = data.blog_data;

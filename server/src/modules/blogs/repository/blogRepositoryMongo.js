@@ -121,9 +121,9 @@ async function rps_getWritersBlogsData(limit,pages,search,user_id) {
         };
 
         if(user_id!='')
-            {
+        {
                 filter.user_id = user_id;
-            }
+        }
 
         if(search!=''){
             filter = { 
@@ -150,10 +150,14 @@ async function rps_getWritersBlogsData(limit,pages,search,user_id) {
         const blogs = await Blog.aggregate([
             {
                 $match: {
-                    $or: [
-                        { caption: { $regex: search, $options: 'i' } },
-                        // { content: { $regex: search, $options: 'i' } },
-                        { hashtag: { $regex: search, $options: 'i' } }
+                    $and: [
+                        {
+                            $or: [
+                                { caption: { $regex: search, $options: 'i' } },
+                                { hashtag: { $regex: search, $options: 'i' } }
+                            ]
+                        },
+                        {user_id}
                     ]
                 }
             },

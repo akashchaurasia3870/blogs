@@ -5,6 +5,8 @@ import DashBlogItem from './DashBlogItem/DashBlogItem';
 import { BlogDataContext } from '../../../context/Blog_Context';
 import { CSVDownload } from "react-csv";
 import api_url, { exportPdf } from '../../../utils/utils';
+import { MdDelete } from "react-icons/md";
+import { FiEdit } from "react-icons/fi";
 
 
 
@@ -173,7 +175,7 @@ const Blogs = () => {
                                 Date Created
                                 </th>
                                 <th className="px-5 py-3 border-b-2 text-left font-semibold uppercase tracking-wider">
-                                Likes
+                                Action
                                 </th>
                             </tr>
                             </thead>
@@ -182,16 +184,19 @@ const Blogs = () => {
                                 <tr key={item.id} className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
                                 >
                                 <td className="px-5 py-5">
-                                    <img src={api_url+item.filePaths.images} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
+                                    <img src={api_url+item?.filePaths?.images} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
                                 </td>
                                 <td className="px-5 py-5">
                                     <p className=" whitespace-no-wrap">{item.caption}</p>
                                 </td>
                                 <td className="px-5 py-5">
-                                    <p className=" whitespace-no-wrap">{item.date_created}</p>
+                                    <p className=" whitespace-no-wrap">{new Date(item.date_created).toLocaleDateString('en-GB')}</p>
                                 </td>
                                 <td className="px-5 py-5">
-                                    <p className=" whitespace-no-wrap">{item.likes}</p>
+                                    <p className="whitespace-no-wrap space-x-2 flex items-center justify-start">
+                                        <button onClick={()=>{openModal(item)}} className={`bg-gray-500 px-2 rounded text-white`}>View</button>
+                                        <button className={`bg-gray-500 px-2 rounded text-white`}>Delete</button>
+                                    </p>
                                 </td>
                                 </tr>
                             ))}
@@ -211,8 +216,8 @@ const Blogs = () => {
 
             {/* Modal */}
             {modalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
+                <div className={`font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight} fixed inset-0 flex items-center justify-center text-[9px] sm:text-xs md:text-sm lg:text-md`}>
+                <div className={`bg-${theme} p-6 rounded-lg shadow-lg w-full max-w-lg relative`}>
                     <button
                         onClick={closeModal}
                         className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl"
@@ -221,25 +226,24 @@ const Blogs = () => {
                     </button>
                     {selectedBlog && (
                         <>
-                            <h2 className="text-2xl font-bold mb-4">{selectedBlog.title}</h2>
+                            <h2 className="font-bold mb-4">{selectedBlog.title}</h2>
                             <img
-                                src={image_ref_c || "https://via.placeholder.com/150"}
-                                alt={selectedBlog.title}
+                                src={selectedBlog.filePaths?.images}
                                 className="w-full h-48 object-cover rounded-lg mb-4"
                             />
-                            <p className="text-gray-500 mb-2">
-                                <span className="font-semibold">Author:</span> {selectedBlog.author || "John Doe"}
+                            <p className="mb-2">
+                                <span className="font-semibold">Ttile:</span> {selectedBlog.caption}
                             </p>
-                            <p className="text-gray-500 mb-2">
-                                <span className="font-semibold">Date:</span> {selectedBlog.date || "2024-08-25"}
+                            <p className="mb-2">
+                                <span className="font-semibold">Date:</span>{new Date(selectedBlog.date_created).toLocaleDateString('en-GB')}
                             </p>
-                            <p className="text-gray-500 mb-2">
-                                <span className="font-semibold">Likes:</span> {selectedBlog.likes || 0}
+                            <p className="mb-2">
+                                <span className="font-semibold">Description:</span> {selectedBlog.content}
                             </p>
-                            <p className="text-gray-500 mb-4">
-                                <span className="font-semibold">Views:</span> {selectedBlog.views || 0}
+                            <p className=" mb-2">
+                                <span className="font-semibold">Likes:</span> {selectedBlog.likes}
                             </p>
-                            <p>{selectedBlog.content || "This is the blog content."}</p>
+                            <p>{selectedBlog.hashtags}</p>
                         </>
                     )}
                 </div>

@@ -45,7 +45,7 @@ function TrendingBlogs() {
                 <h2 className="text-2xl font-bold mb-6">Trending Blogs</h2>
                 <ul className="space-y-3">
                     {blog_data.map((blog, index) => (
-                        <Link to={`/blog/${blog.blog_id}`} state={{ blogData: blog_data }} className={``}>
+                        <Link to={`/blog/${blog.blog_id}`} state={{ blogData: blog }} className={``}>
                             <li key={blog.id}
                                 className={`flex items-center space-x-3 p-4 my-3 rounded-lg bg-${theme}`}
                                 // style={{ background: themeGenerator() }}

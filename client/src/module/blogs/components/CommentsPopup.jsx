@@ -58,7 +58,7 @@ const CommentsPopup = ({ blog_id, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 mx-3 text-[9px] sm:text-sm md:text-md lg:text-lg">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-5">
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
@@ -80,13 +80,13 @@ const CommentsPopup = ({ blog_id, onClose }) => {
                 <img
                   src={comment?.userImage}
                   alt="User"
-                  className="w-12 h-12 rounded-full mr-3 bg-gray-600"
+                  className="w-8 h-8 md:w-12 md:h-12 rounded-full mr-3 bg-gray-600"
                 />
                 <div>
                   <h4 className="font-bold text-gray-800">{comment?.username}</h4>
                   {/* Comment Message */}
                   <p className="text-gray-600">{comment?.comment}</p>
-                  <p className="text-sm text-gray-400">
+                  <p className=" text-gray-400">
                     {new Date(comment?.timestamp).toLocaleString()}
                   </p>
                 </div>

@@ -28,11 +28,11 @@ const UserCard = ({data}) => {
 
   let {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext)
   return (
-    <div className={`w-32 sm:w-56 md:w-56 lg:w-72 mx-auto bg-${theme} shadow-md rounded-lg p-2 md:p-4 lg:p-6 text-center text-${fontColor}-600 ${fontWeight} ${fontStyle} text-[8px] sm:text-sm md:text-md lg:text-lg `}>
+    <div className={`w-32 sm:w-56 md:w-56 lg:w-72 mx-auto bg-gray-900 shadow-md rounded-lg p-2 md:p-4 lg:p-6 text-center text-${fontColor}-600 ${fontWeight} ${fontStyle} text-[8px] sm:text-sm md:text-md lg:text-lg `}>
 
 <Link to={`/blogs/${data?.user_id}`}>
       {/* Profile Image */}
-      <div className="relative mx-auto w-12 h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 lg:w-24 lg:h-24 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 p-[3px] ">
+      <div className="relative mx-auto w-12 h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 lg:w-24 lg:h-24 rounded-full bg-gradient-to-tr from-red-400 via-green-500 to-blue-500 p-[3px] ">
         <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
           <div className="w-20 h-20 bg-${fontColor}-300 rounded-full"></div>
         </div>

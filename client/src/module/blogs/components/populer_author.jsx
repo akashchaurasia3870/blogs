@@ -8,6 +8,7 @@ const PopularAuthors = () => {
     let { theme,theme2,fontColor,fontStyle,fontWeight ,
         authors_data, setAuthorsData,similier_data, 
         setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
+        
     const [authors, setAuthors] = useState(authors_data);
     const [page, setPage] = useState(1);
     const [dataSize, setDataLimit] = useState(5);

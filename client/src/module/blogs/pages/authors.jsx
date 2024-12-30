@@ -92,19 +92,19 @@ function Authors() {
     }
 
     return (
-        <section className={`min-h-[100vh] authors w-full bg-${theme} px-2 md:px-4 flex flex-col justify-center items-center text-[9px] sm:text-sm md:text-md lg:text-lg`}>
+        <section className={`min-h-[100vh] authors w-full bg-${theme} px-2 md:px-4 flex flex-col justify-start items-center text-[9px] sm:text-sm md:text-md lg:text-lg`}>
 
             <Filter onSearch={handleSearch} onSort={handleSort} onLayoutChange={handleLayoutChange} />
         
             {authorData.length > 0 ?
 
-                <div className={`py-2 w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 rounded-lg`}
+                <div className={`py-2 w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 rounded-lg min-h-[80vh]`}
                 style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                 >
                     {authorData.map((author) => {
                         return (
 
-                            <div className='flex flex-row justify-center items-center py-1 rounded-md my-2 mx-2 hover:scale-[1.025] duration-300 ease-in-out'>
+                            <div className='flex flex-row justify-center items-start py-1 rounded-md my-2 mx-2 hover:scale-[1.025] duration-300 ease-in-out'>
                                 <UserCard data={author}/> 
                             </div>
                         )

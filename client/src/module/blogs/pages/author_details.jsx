@@ -36,8 +36,6 @@ const AuthorDetails = () => {
                     
                 } else {
                     console.error("Failed to fetch blog data.");
-                    // localStorage.removeItem("token");
-                    // navigate('/signin');
                 }
             } catch (error) {
                 console.error("Error fetching blog data:", error);
@@ -49,11 +47,8 @@ const AuthorDetails = () => {
 
     return (
       <div className={`mx-auto p-3 md:p-6 bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
-        {/* <AuthorBio author_data={author_data} /> */}
         <UserBio author_data={author_data} />
         <AuthorsBlogs blogs_data={blogs_data} />
-        {/* <Pagination /> */}
-        {/* <PopularAuthors /> */}
       </div>
     );
 };

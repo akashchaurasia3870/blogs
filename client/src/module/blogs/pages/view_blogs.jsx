@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import BlogItem from '../components/blog_item';
 import api_url from "../../../utils/utils";
 import BlogItemDetails from '../components/blog_item_details';
 import Filter from '../../../global_components/filter/filter';
