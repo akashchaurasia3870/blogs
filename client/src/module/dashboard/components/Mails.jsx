@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
-import { BlogDataContext } from '../../../context/Blog_Context';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Notifications = () => {
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
+    const {themeValue} = useTheme();
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('date');
     const [selectedNotification, setSelectedNotification] = useState(null);
@@ -52,8 +51,6 @@ const Notifications = () => {
         return 0;
     });
 
-    
-
     const openModal = (notification) => {
         setSelectedNotification(notification);
         setModalOpen(true);
@@ -68,19 +65,19 @@ const Notifications = () => {
         <div className="p-6">
             {/* Navbar */}
             <div className="flex justify-between items-center mb-6">
-                <h1 className={`text-2xl font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Mails</h1>
+                <h1 className={`text-2xl font-bold  text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} font-${themeValue.fontweight}`}>Mails</h1>
                 <div className="flex space-x-4">
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                        className={`border border-gray-300 rounded p-2 text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} font-${themeValue.fontweight} `}
                     >
                         <option value="date">Sort by Date</option>
                     </select>
                     <select
                         value={sortOrder}
                         onChange={(e) => setSortOrder(e.target.value)}
-                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                        className={`border border-gray-300 rounded p-2 text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} font-${themeValue.fontweight} `}
                     >
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
@@ -93,9 +90,8 @@ const Notifications = () => {
                 {notifications.map((notification) => (
                     <div
                         key={notification.id}
-                        className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg`}
+                        className={` text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg`}
                         // onClick={() => openModal(notification)} 
-                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                     >
                     
                         <h2 className="text-2xl mb-4">{notification.title}</h2>
@@ -112,7 +108,7 @@ const Notifications = () => {
                         </div>
                         <div className="overflow-x-auto">
                         <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden" 
-                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                        
                         >
                             <thead >
                             <tr>

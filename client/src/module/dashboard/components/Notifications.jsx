@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
-import { BlogDataContext } from '../../../context/Blog_Context';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Notifications = () => {
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
+    const {themeValue} = useTheme();
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('date');
     const [selectedNotification, setSelectedNotification] = useState(null);
@@ -68,19 +67,19 @@ const Notifications = () => {
         <div className="p-6 text-[9px] sm:text-xs md:text-sm lg:text-md">
             {/* Navbar */}
             <div className="flex justify-between items-center mb-6">
-                <h3 className={`font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Notifications</h3>
+                <h3 className={`font-bold  text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} font-${themeValue.fontweight}`}>Notifications</h3>
                 <div className="flex space-x-2">
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className={`bg-gray-${theme2} rounded p-1 md:p-2 text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                        className={` rounded p-1 md:p-2 text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} font-${themeValue.fontweight} `}
                     >
                         <option value="date">Sort by Date</option>
                     </select>
                     <select
                         value={sortOrder}
                         onChange={(e) => setSortOrder(e.target.value)}
-                        className={`bg-gray-${theme2} rounded p-1 md:p-2  text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                        className={` rounded p-1 md:p-2  text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} font-${themeValue.fontweight} `}
                     >
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
@@ -93,9 +92,7 @@ const Notifications = () => {
                 {notifications.map((notification) => (
                     <div
                         key={notification.id}
-                        className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg`}
-                        // onClick={() => openModal(notification)}
-                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                        className={` text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg ${themeValue.bgvalue2}`}
                     >
                     
                         <h2 className="text-2xl mb-4">{notification.title}</h2>

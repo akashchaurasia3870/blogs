@@ -9,10 +9,7 @@ import NewsLatter from '../../../global_components/newslatter/newslatter';
 import Contact from '../../../global_components/contact/contact';
 function ViewBlogs({handleSearch,handleSort,handleLayoutChange,blogs_data,layout}) {
 
-    let { theme,theme2,fontColor,fontStyle,fontWeight ,
-        authors_data, setAuthorsData,similier_data, 
-        setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
-
+    let {trainding_data}  = useContext(BlogDataContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 

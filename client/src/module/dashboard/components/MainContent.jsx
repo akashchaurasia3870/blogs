@@ -11,12 +11,12 @@ import SearchSection from './Search/dash_search';
 import Mails from '../../mail/pages/Mails';
 import Notification from '../../notification/pages/Notification'
 import Reports from './Reports';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import Horizontalbar from './Horizontalbar';
+import { useTheme } from '../../../context/ThemeContext';
 
 const MainContent = ({ activePage,onMenuItemClick }) => {
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight,setTheme,setTheme2,setFontSize,setFontColor,setFontWeight,setFontStyle,setBackgroundImage} = useContext(BlogDataContext);
+    const {themeValue} = useTheme();
 
     // const onMenuItemClick = (item)=>{
     //     setActivePage(item)
@@ -47,7 +47,7 @@ const MainContent = ({ activePage,onMenuItemClick }) => {
     };
 
     return (
-        <div className={`flex-1 overflow-y-scroll bg-${theme} text-${fontColor}-200 ${fontWeight} ${fontStyle}`}>
+        <div className={`flex-1 overflow-y-scroll ${themeValue.bgvalue2} text-${themeValue.fontsize} text-${themeValue.fontcolor}-500`}>
             <SearchSection className='rounded-none' />
             <div className="mt-0 p-4">
                 {renderPageContent(activePage)}

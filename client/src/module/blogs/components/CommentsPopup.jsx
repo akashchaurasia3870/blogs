@@ -13,9 +13,9 @@ const CommentsPopup = ({ blog_id, onClose }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token"),
           },
           body: JSON.stringify({blog_id}),
+          credentials: "include",
         });
       if (response.ok) {
         const data = await response.json();        
@@ -39,10 +39,10 @@ const CommentsPopup = ({ blog_id, onClose }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": localStorage.getItem("token"),
 
         },
         body: JSON.stringify({ comment_data: newComment,blog_id}),
+        credentials: "include",
       });
 
       if (response.ok) {
@@ -80,7 +80,7 @@ const CommentsPopup = ({ blog_id, onClose }) => {
                 <img
                   src={comment?.userImage}
                   alt="User"
-                  className="w-8 h-8 md:w-12 md:h-12 rounded-full mr-3 bg-gray-600"
+                  className="w-8 h-8 md:w-12 md:h-12 rounded-sm mr-3 bg-gray-600"
                 />
                 <div>
                   <h4 className="font-bold text-gray-800">{comment?.username}</h4>

@@ -1,21 +1,19 @@
-import React, { useContext } from 'react';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import api_url from '../../../utils/utils';
+import { useTheme } from '../../../context/ThemeContext';
 
 const NotificationItem = ({ notification, onReply }) => {    
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
+    const {themeValue} = useTheme();
     let img_url = api_url+notification.user_details.userImage ;    
 
     return (
-        <div className={`shadow-md rounded-lg p-4 flex justify-between items-center hover:shadow-lg text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg`} 
-        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+        <div className={`shadow-md rounded-lg p-4 flex justify-between items-center hover:shadow-lg text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} shadow-md rounded-lg ${themeValue.theme}`} 
+        >
             <div className="flex items-center">
                 <img 
                 src={`${api_url}${notification.user_details.userImage}`} 
                 // src={`${api_url}/data/images/2d5db27d-525c-4feb-88d0-0b353ddbc7f6.png`} 
-                alt="Sender" className="w-12 h-12 rounded-full object-cover mr-4 p-1" />
+                alt="Sender" className="w-12 h-12 rounded-sm object-cover mr-4 p-1" />
                 <div>
                     <h2 className="text-xl font-bold">{notification.subject}</h2>
                     <p className="text-gray-500">{notification.user_details.username} - {notification.date_created}</p>

@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 const corsOptions = {
@@ -24,8 +25,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 app.use(bodyParser.json({ limit: '50mb' }));
-// app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
-
+app.use(cookieParser());
 dotenv.config();
 let PORT = process.env.PORT;
 

@@ -1,22 +1,23 @@
 import React, { useContext } from "react";
-import { BlogDataContext } from "../../../context/Blog_Context";
 import api_url from "../../../utils/utils";
+import { useTheme } from "../../../context/ThemeContext";
 
 const UserBio = ({author_data}) => {
   
-    let {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext)
+  const {themeValue} = useTheme();
+
   return (
-    <div className={`w-full mx-auto shadow-md rounded-lg p-6 bg-gray-800 text-${fontColor}-600 ${fontWeight} ${fontStyle} text-[8px] sm:text-sm md:text-md lg:text-lg`}>
+    <div className={`w-full mx-auto shadow-md rounded-lg p-6 text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 ${themeValue.bgvalue2} text-[8px] sm:text-sm md:text-md lg:text-lg`}>
       {/* Profile Section */}
       <div className="flex flex-col sm:flex-row items-center justify-center md:justify-around">
         {/* Profile Image with Gradient */}
         <div className="flex flex-col md:flex-row items-center justify-center md:items-center md:justify-start">    
-            <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-tr from-red-400 via-green-500 to-blue-500 p-[2px]">
-            <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-sm bg-gradient-to-tr from-red-400 via-green-500 to-blue-500 p-[2px]">
+            <div className="w-full h-full bg-white rounded-sm flex items-center justify-center">
                 <img
                 src={`${api_url+author_data?.userImage||'https://via.placeholder.com/80'}`}
                 alt=""
-                className="w-full h-full rounded-full object-cover"
+                className="w-full h-full rounded-sm object-cover"
                 />
             </div>
             

@@ -18,12 +18,12 @@ import BlogItemDetails from '../components/blog_item_details';
 import data_c from '../../../assets/data/data.json'
 import { BlogDataContext } from '../../../context/Blog_Context';
 import BlogItem from '../components/blog_item';
+import { useTheme } from '../../../context/ThemeContext';
 
 function BlogDetails({ data }) {
 
-    let { theme,theme2,fontColor,fontStyle,fontWeight ,
-        authors_data, setAuthorsData,similier_data, 
-        setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
+    let {similier_data,trainding_data}  = useContext(BlogDataContext);
+    const {themeValue} = useTheme();
 
     let { blog_id } = useParams();
     const location = useLocation();
@@ -43,9 +43,9 @@ function BlogDetails({ data }) {
         return <>Loading</>
     }
     return (
-        <section className={`min-h-[80vh] py-8 bg-${theme} text-[13px] sm:text-sm md:text-md lg:text-lg`}>
+        <section className={`min-h-[80vh] py-8 ${themeValue.theme} text-[13px] sm:text-sm md:text-md lg:text-lg`}>
 
-            <div className={`mx-4 flex flex-col lg:flex-row text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg`}>
+            <div className={`mx-4 flex flex-col lg:flex-row text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 rounded-lg`}>
                 {/* Blog Details Section */}
                 {/* <div className="w-full lg:w-3/4 pr-0 lg:pr-8 flex flex-col justify-between rounded-lg mr-4" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
                     <div className="flex flex-col justify-center p-2 mx-2">

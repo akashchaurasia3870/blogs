@@ -2,15 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
 import image_ref_c from '../../../assets/img/img1.jpg'; 
 import DashBlogItem from './DashBlogItem/DashBlogItem';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import api_url from '../../../utils/utils';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Users = () => {
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
+    const {themeValue} = useTheme();
     const [users, setUsers] = useState([]);
-
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('name');
     const [selectedUser, setSelectedUser] = useState(null);
@@ -49,7 +47,6 @@ const Users = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization": localStorage.getItem("token")
                 },
                 body: JSON.stringify({
                     pages,
@@ -58,6 +55,7 @@ const Users = () => {
                     "sort_order":sortOrder,
                     "search":search
                 }),
+                credentials: "include",
             }).then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -89,12 +87,12 @@ const Users = () => {
             {/* Navbar */}
             <div>
                 <div className={`flex justify-between items-center mb-2`}>
-                    <h3 className={`font-bold text-${fontColor}-600 {fontStyle} ${fontWeight}`}>Users</h3>
+                    <h3 className={`text-${themeValue.fontcolor}-500 {fontStyle} font-${themeValue.fontweight}`}>Users</h3>
                     <div className="flex space-x-2">
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className={` bg-gray-${theme2} rounded p-1 md:p-2 text-${fontColor}-600`}
+                            className={` ${themeValue.theme} rounded p-1 md:p-2 text-${themeValue.fontcolor}-500`}
                         >
                             <option value="name">Sort by Name</option>
                             {/* Add more sort options if necessary */}
@@ -102,7 +100,7 @@ const Users = () => {
                         <select
                             value={sortOrder}
                             onChange={(e) => setSortOrder(e.target.value)}
-                            className={`bg-gray-${theme2} rounded p-1 md:p-2 text-${fontColor}-600`}
+                            className={`${themeValue.theme} rounded p-1 md:p-2 text-${themeValue.fontcolor}-500`}
                         >
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
@@ -113,7 +111,7 @@ const Users = () => {
                 {/* User Content */}
                 {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {sortedUsers.map((user) => (
-                        <div key={user.id} className={`bg-white p-4 rounded-lg shadow-md cursor-pointer text-${fontColor}-600`} 
+                        <div key={user.id} className={`bg-white p-4 rounded-lg shadow-md cursor-pointer text-${themeValue.fontcolor}-500`} 
                         style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                         // onClick={() => openModal(user)}
                         >
@@ -140,9 +138,9 @@ const Users = () => {
                 {/* <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
                 </div> */}
                 <div className="overflow-x-auto">
-                        <table className={`min-w-full leading-normal shadow-md rounded-lg overflow-hidden bg-gray-${theme2}`} 
+                        <table className={`min-w-full leading-normal shadow-md rounded-lg overflow-hidden ${themeValue.theme}`} 
                         >
-                            <thead className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>
+                            <thead className={`text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} font-${themeValue.fontweight}`}>
                             <tr>
                                 <th className="px-2 py-1 md:px-5 md:py-3 border-b-2 text-left  font-semibold uppercase md:tracking-wider">
                                 User
@@ -160,10 +158,10 @@ const Users = () => {
                             </thead>
                             <tbody>
                             {sortedUsers?.map((item) => (
-                                <tr key={item.id} className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
+                                <tr key={item.id} className={`text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} font-${themeValue.fontweight}`}
                                 >
                                 <td className="p-2 md:p-5 flex flex-col justify-center items-center">
-                                    <img src={api_url+item.userImage} alt={'img'} className="w-8 h-8 md:w-16 md:h-16 rounded-full object-cover" />
+                                    <img src={api_url+item.userImage} alt={'img'} className="w-8 h-8 md:w-16 md:h-16 rounded-sm object-cover" />
                                     <span className='text-center mt-2'>{item.username}</span>
                                 </td>
                                 <td className="p-2 md:p-5">

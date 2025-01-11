@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import api_url from "../../../utils/utils";
-import { BlogDataContext } from "../../../context/Blog_Context";
+import { useTheme } from "../../../context/ThemeContext";
 
 const AddBlog = () => {
 
-    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
+    const {themeValue} = useTheme();
+    
   
     const [blogData, setBlogData] = useState({
         title: "blog tile",
@@ -20,10 +21,6 @@ const AddBlog = () => {
     const [imageInputKey, setImageInputKey] = useState(Date.now());
     const [videoInputKey, setVideoInputKey] = useState(Date.now());
 
-
-
-
-    // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setBlogData({
@@ -32,7 +29,6 @@ const AddBlog = () => {
         });
     };
 
-    // Handle image change
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
         if (files.length + blogData.images.length <= 5) {
@@ -52,7 +48,6 @@ const AddBlog = () => {
         }
     };
 
-    // Handle video change
     const handleVideoChange = (e) => {
         const files = Array.from(e.target.files);
         if (files.length + blogData.videos.length <= 2) {
@@ -84,9 +79,9 @@ const AddBlog = () => {
                     method: "POST",
                     headers: {
                         "Content-Type": file.type,
-                        "Authorization": localStorage.getItem("token"),
                     },
                     body: binaryData,
+                    credentials: "include",
                 })
                     .then((response) => response.json())
                     .then((data) => {
@@ -110,7 +105,6 @@ const AddBlog = () => {
 
     };
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -127,9 +121,9 @@ const AddBlog = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: JSON.stringify(blogData),
+                credentials: "include",
             });
 
 
@@ -151,19 +145,16 @@ const AddBlog = () => {
             }
         } catch (error) {
             console.error("Error creating blog:", error);
-            localStorage.removeItem("token");
             navigate('/signin');
         }
     };
 
     return (
-        <div className={`min-h-screen bg-${theme} flex items-center justify-center text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
-            <div className="p-3 md:p-8 rounded-lg shadow-md w-full">
+        <div className={`flex items-center justify-center ${themeValue.theme} text-${themeValue.fontsize} text-${themeValue.fontcolor}-500`}>
+            <div className="p-3 md:p-8 w-full">
                 <h2 className="text-2xl font-semibold mb-6">Create A Blog Post</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" 
-                    style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
-                    >
+                    <div className={`flex flex-col items-start justify-center p-3 rounded-lg ${themeValue.bgvalue2}`}>
                         <span className="">Title:</span>
                         <input
                             type="text"
@@ -172,10 +163,10 @@ const AddBlog = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter the title of your blog"
-                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg-gray-400 p-3"
+                            className={`w-full md:w-1/2 lg:w-1/3 rounded-md  p-3 ${themeValue.theme}`}
                         />
                     </div>
-                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                    <div className={`flex flex-col items-start justify-center p-3 rounded-lg ${themeValue.bgvalue2}`} >
                         <span className="block">Caption:</span>
                         <input
                             type="text"
@@ -183,10 +174,10 @@ const AddBlog = () => {
                             value={blogData.caption}
                             onChange={handleChange}
                             placeholder="e.g., An unforgettable journey through the mountains."
-                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg-gray-400 p-3"
+                            className={`w-full md:w-1/2 lg:w-1/3 rounded-md  p-3 ${themeValue.theme}`}
                         />
                     </div>
-                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                    <div className={`flex flex-col items-start justify-center p-3 rounded-lg ${themeValue.bgvalue2}`} >
                         <span className="block">Hashtags:</span>
                         <input
                             type="text"
@@ -194,10 +185,10 @@ const AddBlog = () => {
                             value={blogData.hashtags}
                             onChange={handleChange}
                             placeholder="e.g., #Travel #Adventure #Nature"
-                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg-gray-400 p-3"
+                            className={`w-full md:w-1/2 lg:w-1/3 rounded-md  p-3 ${themeValue.theme}`}
                         />
                     </div>
-                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                    <div className={`flex flex-col items-start justify-center p-3 rounded-lg ${themeValue.bgvalue2}`} >
                         <span className="">Content:</span>
                         <textarea
                             name="content"
@@ -206,11 +197,11 @@ const AddBlog = () => {
                             rows="10"
                             required
                             placeholder="Write the content of your blog..."
-                            className="w-full md:w-1/2 lg:w-1/3 rounded-md bg-gray-400 p-3"
+                            className={`w-full md:w-1/2 lg:w-1/3 rounded-md  p-3 ${themeValue.theme}`}
                         ></textarea>
                     </div>
 
-                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                    <div className={`flex flex-col items-start justify-center p-3 rounded-lg ${themeValue.bgvalue2}`} >
                         <span className="block  p-3 ">Post Images (Max 5):</span>
                         <input
                             type="file"
@@ -220,7 +211,7 @@ const AddBlog = () => {
                             onChange={(e) => { handleImageChange(e); }}
                             className="mt-1 block w-full text-sm text-gray-500
                                 file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
+                                file:rounded-sm file:border-0
                                 file:text-sm file:font-semibold
                                 file:bg-blue-50 file:text-blue-700
                                 hover:file:bg-blue-100"
@@ -236,7 +227,7 @@ const AddBlog = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                    <div className={`flex flex-col items-start justify-center p-3 rounded-lg ${themeValue.bgvalue2}`} >
                         <span className="block  p-3 ">Post Videos (Max 2):</span>
                         <input
                             type="file"
@@ -246,7 +237,7 @@ const AddBlog = () => {
                             onChange={(e) => { handleVideoChange(e); }}
                             className="mt-1 block w-full text-sm text-gray-500
                                 file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
+                                file:rounded-sm file:border-0
                                 file:text-sm file:font-semibold
                                 file:bg-blue-50 file:text-blue-700
                                 hover:file:bg-blue-100"
@@ -266,7 +257,7 @@ const AddBlog = () => {
                     </div>
                     <button
                         type="submit"
-                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                        className={`px-5 py-4 rounded-md ${themeValue.bgvalue2}`}
                     >
                         Create Blog
                     </button>

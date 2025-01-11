@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import img from '../../../assets/img/img1.jpg';
-import { BlogDataContext } from "../../../context/Blog_Context";
 import api_url from "../../../utils/utils";
+import { useTheme } from "../../../context/ThemeContext";
 const Profile = () => {
 
-    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
-  
+    const {themeValue} = useTheme();
     let [image_url, setImageUrl] = useState(null);
-
     const [isEditable, setIsEditable] = useState(false);
     const [profileData, setProfileData] = useState({});
     const [originalData, setOriginalData] = useState({});
@@ -25,8 +23,8 @@ const Profile = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem("token"),
                 },
+                credentials: "include",
             }); // Replace with actual API endpoint
             const data = await response.json();
 
@@ -50,7 +48,6 @@ const Profile = () => {
         }
     };
 
-    // Handle input change
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProfileData({
@@ -59,13 +56,11 @@ const Profile = () => {
         });
     };
 
-    // Handle image change
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                // setProfileData({ ...profileData, userImage: reader.result });
                 setImageUrl(reader.result)
             };
             reader.readAsDataURL(file);
@@ -75,15 +70,13 @@ const Profile = () => {
         }
     };
 
-    // Toggle edit mode
     const toggleEdit = () => {
         setIsEditable(!isEditable);
         if (!isEditable) {
-            setOriginalData(profileData); // Save current data before editing
+            setOriginalData(profileData);
         }
     };
 
-    // Cancel editing
     const cancelEdit = () => {
         setImageUrl(api_url + originalData.userImage)
         setProfileData(originalData); // Revert to original data
@@ -101,9 +94,9 @@ const Profile = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": file.type,
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: binaryData,
+                credentials: "include",
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -157,9 +150,8 @@ const Profile = () => {
         }
       
         return result;
-      }
+    }
 
-    // Update user details
     const updateUserDetails = async () => {
         try {
             let url = api_url + '/users/update_user_info';
@@ -170,9 +162,9 @@ const Profile = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: JSON.stringify({"update_feilds":update_feilds}),
+                credentials: "include",
             });
             if (response.ok) {
                 let data_c = {
@@ -197,17 +189,17 @@ const Profile = () => {
     };
 
     return (
-        <div className={`flex flex-col items-center justify-center min-h-screen bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle} p-4`} 
+        <div className={`flex flex-col items-center justify-center text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 ${themeValue.theme} p-4`} 
         >
-            <div className="p-0 md:p-6 rounded-lg shadow-md w-full">
-                <div className="flex flex-col justify-center items-center ">
+            <div className="w-full">
+                <div className="flex flex-col justify-between items-center ">
                     {/* User Image Section */}
                     <div className="w-full flex flex-col items-center justify-center"             
                     >
                         <img
                             src={image_url}
                             alt=""
-                            className="rounded-full h-32 w-32 object-cover mb-4 shadow-md p-1 bg-gray-500"
+                            className="rounded-sm h-32 w-32 md:h-48 md:w-48 object-cover mb-4 shadow-md p-1 bg-gray-500"
                         />
                         {isEditable && (
                             <input
@@ -215,7 +207,7 @@ const Profile = () => {
                                 onChange={handleImageChange}
                                 className="p-2 rounded-lg  text-sm
                                            file:mr-4 file:py-2 file:px-4
-                                           file:rounded-full file:border-0
+                                           file:rounded-sm file:border-0
                                            file:text-sm file:font-semibold
                                             file:bg-blue-50 file:text-blue-700
                                             hover:file:bg-gray-400"
@@ -225,9 +217,9 @@ const Profile = () => {
 
                     {/* Profile Details Section */}
                     <div className="w-full">
-                        <form className="space-y-4">
-                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
-                            >
+                        <form className=" w-full flex flex-wrap flex-row items-center justify-between">
+                            {/* username */}
+                            <div className={`input_container w-full sm:w-[48%] md:w-[30%] p-3 ${themeValue.bgvalue2} rounded-lg`}>
                                 <label className="block ">Username:</label>
                                 <input
                                     type="text"
@@ -235,10 +227,11 @@ const Profile = () => {
                                     value={profileData.username}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                    className={`mt-1 block w-full rounded-md shadow-sm ${themeValue.theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
                                 />
                             </div>
-                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            {/* email */}
+                            <div className={`input_container w-full sm:w-[48%] md:w-[30%] p-3 ${themeValue.bgvalue2} rounded-lg`} 
                             >
                                 <label className="block ">Email:</label>
                                 <input
@@ -247,10 +240,11 @@ const Profile = () => {
                                     value={profileData.email}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                    className={`mt-1 block w-full rounded-md shadow-sm ${themeValue.theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
                                 />
                             </div>
-                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            {/* phone */}
+                            <div className={`input_container w-full sm:w-[48%] md:w-[30%] p-3 rounded-lg ${themeValue.bgvalue2}`} 
                             >
                                 <label className="block ">Mobile No:</label>
                                 <input
@@ -259,85 +253,76 @@ const Profile = () => {
                                     value={profileData.phone}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                    className={`mt-1 block w-full rounded-md shadow-sm ${themeValue.theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                />
+                            </div>
+                            {/* Street */}
+                            <div className={`input_container w-full sm:w-[48%] md:w-[30%] p-3 rounded-lg ${themeValue.bgvalue2}`}>
+                                <label className="block">City:</label>
+                                <input
+                                type="text"
+                                name="city"
+                                value={profileData?.city}
+                                onChange={handleChange}
+                                disabled={!isEditable}
+                                className={`mt-1 block w-full rounded-md shadow-sm ${themeValue.theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
                                 />
                             </div>
 
-                            <div
-                            className="input_container p-5 rounded-lg"
-                            style={{ backgroundColor: theme === "black" ? "#1e293b" : "#e2e8f0" }}
-                            >
-                                <h3 className="text-lg font-semibold mb-3">Address</h3>
-
-                                {/* Street */}
-                                <div className="input_container p-3 rounded-lg mb-3">
-                                    <label className="block">City:</label>
-                                    <input
-                                    type="text"
-                                    name="city"
-                                    value={profileData?.city}
-                                    onChange={handleChange}
-                                    disabled={!isEditable}
-                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
-                                    />
-                                </div>
-
-                                {/* City */}
-                                <div className="input_container p-3 rounded-lg mb-3">
-                                    <label className="block">State:</label>
-                                    <input
-                                    type="text"
-                                    name="state"
-                                    value={profileData?.state}
-                                    onChange={handleChange}
-                                    disabled={!isEditable}
-                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
-                                    />
-                                </div>
-
-                                {/* Country */}
-                                <div className="input_container p-3 rounded-lg mb-3">
-                                    <label className="block">Country:</label>
-                                    <input
-                                    type="text"
-                                    name="country"
-                                    value={profileData?.country}
-                                    onChange={handleChange}
-                                    disabled={!isEditable}
-                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
-                                    />
-                                </div>
-
-                                {/* Pincode */}
-                                <div className="input_container p-3 rounded-lg">
-                                    <label className="block">Pincode:</label>
-                                    <input
-                                    type="text"
-                                    name="pincode"
-                                    value={profileData?.pincode}
-                                    onChange={handleChange}
-                                    disabled={!isEditable}
-                                    className={`mt-1 block w-full rounded-md shadow-sm bg-${theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
-                                    />
-                                </div>
+                            {/* City */}
+                            <div className={`input_container w-full sm:w-[48%] md:w-[30%] p-3 rounded-lg ${themeValue.bgvalue2}`}>
+                                <label className="block">State:</label>
+                                <input
+                                type="text"
+                                name="state"
+                                value={profileData?.state}
+                                onChange={handleChange}
+                                disabled={!isEditable}
+                                className={`mt-1 block w-full rounded-md shadow-sm ${themeValue.theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                />
                             </div>
 
-                            <div className="flex space-x-4 mt-4 input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            {/* Country */}
+                            <div className={`input_container w-full sm:w-[48%] md:w-[30%] p-3 rounded-lg ${themeValue.bgvalue2}`}>
+                                <label className="block">Country:</label>
+                                <input
+                                type="text"
+                                name="country"
+                                value={profileData?.country}
+                                onChange={handleChange}
+                                disabled={!isEditable}
+                                className={`mt-1 block w-full rounded-md shadow-sm ${themeValue.theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                />
+                            </div>
+
+                            {/* Pincode */}
+                            <div className={`input_container w-full sm:w-[48%] md:w-[30%] p-3 rounded-lg ${themeValue.bgvalue2}`}>
+                                <label className="block">Pincode:</label>
+                                <input
+                                type="text"
+                                name="pincode"
+                                value={profileData?.pincode}
+                                onChange={handleChange}
+                                disabled={!isEditable}
+                                className={`mt-1 block w-full rounded-md shadow-sm ${themeValue.theme} focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50`}
+                                />
+                            </div>
+                        </form>
+                        
+                        <div className={`flex space-x-4 sm:w-[48%] md:w-[30%] p-4  rounded-lg`} 
                             >
                                 {isEditable ? (
                                     <>
                                         <button
                                             type="button"
                                             onClick={updateUserDetails}
-                                            className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600"
-                                        >
+                                            className={`px-5 py-3 -ml-2 ${themeValue.bgvalue2} rounded-lg`}                                        >
                                             Save
                                         </button>
                                         <button
                                             type="button"
                                             onClick={cancelEdit}
-                                            className="px-4 py-2 bg-gray-500 rounded-md hover:bg-gray-600"
-                                        >
+                                            className={`px-5 py-3 ${themeValue.bgvalue2} rounded-lg`}                                        >
                                             Cancel
                                         </button>
                                     </>
@@ -345,13 +330,12 @@ const Profile = () => {
                                     <button
                                         type="button"
                                         onClick={toggleEdit}
-                                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                                        className={`px-5 py-3 -ml-2 ${themeValue.bgvalue2} rounded-lg`}
                                     >
                                         Edit
                                     </button>
                                 )}
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ const AuthorBio = ({author_data}) => {
     //   style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
     //   >
     //     <div className="md:w-1/4 mb-4 md:mb-0">
-    //       <img src={img_path} alt="Author" className="rounded-full h-32 w-32" />
+    //       <img src={img_path} alt="Author" className="rounded-sm h-32 w-32" />
     //     </div>
     //     <div className="md:w-3/4 md:ml-6 text-center md:text-left">
     //       <h2 className="text-2xl">{author_data?.username}</h2>
@@ -47,7 +47,7 @@ const AuthorBio = ({author_data}) => {
           <img
             src={img_path}
             alt="Author"
-            className="rounded-full h-32 w-32 md:h-40 md:w-40 border-4 border-gray-300 object-cover"
+            className="rounded-sm h-32 w-32 md:h-40 md:w-40 border-4 border-gray-300 object-cover"
           />
         </div>
     

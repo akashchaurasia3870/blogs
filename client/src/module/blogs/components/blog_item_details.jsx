@@ -8,13 +8,13 @@ import { CiCirclePlus } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
 import { SlCalender } from "react-icons/sl";
 import Hashtag from './hashtag';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import CommentsPopup from './CommentsPopup';
 import ShareModal from './ShareModal';
+import { useTheme } from '../../../context/ThemeContext';
 
 const BlogItemDetails = ({ data }) => {
     let blog_data = data
-    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
+    const {themeValue} = useTheme();
     const [showComments, setShowComments] = useState(false);
     let [likeCount,setLikeCount] = useState(blog_data.likes);
     let [likeStatus,setLikeStatus] = useState(false);
@@ -36,9 +36,9 @@ const BlogItemDetails = ({ data }) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": localStorage.getItem("token"),
             },
-            body: JSON.stringify({ blog_id }), // Pass the blog ID in the request body
+            body: JSON.stringify({ blog_id }),
+            credentials: "include",
           });
       
           if (!response.ok) {
@@ -67,9 +67,9 @@ const BlogItemDetails = ({ data }) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": localStorage.getItem("token"),
             },
-            body: JSON.stringify({ blog_id }), // Pass the blog ID in the request body
+            body: JSON.stringify({ blog_id }),
+            credentials: "include",
           });
       
           if (!response.ok) {
@@ -95,9 +95,9 @@ const BlogItemDetails = ({ data }) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": localStorage.getItem("token"),
             },
-            body: JSON.stringify({ blog_id }), // Pass the blog ID in the request body
+            body: JSON.stringify({ blog_id }),
+            credentials: "include",
           });
       
           if (!response.ok) {
@@ -123,8 +123,7 @@ const BlogItemDetails = ({ data }) => {
 
     return (
         <>
-            <article className={`p-3 text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-[10px]`} 
-            style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+            <article className={`p-3 text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 ${themeValue.bgvalue2} rounded-[10px]`} 
             >
                 <Link to={`/blog/${blog_data.blog_id}`} state={{ blogData: blog_data }}>
                     <div className="h-[200px] w-full">

@@ -4,13 +4,12 @@ import NotificationFilter from '../component/NotificationFilter';
 import Pagination from '../../../global_components/pagination/pagination';
 import NotificationPopup from '../component/NotificationPopup';
 import MassNotificationPopup from '../component/MassNotificationPopup';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import api_url from '../../../utils/utils';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Notification = () => {
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
+    const {themeValue} = useTheme();
     const [notifications, setNotifications] = useState([]);
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('date_entered');
@@ -32,7 +31,6 @@ const Notification = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization": localStorage.getItem("token")
                 },
                 body: JSON.stringify({
                     pages,
@@ -41,6 +39,7 @@ const Notification = () => {
                     "sort_order":sortOrder,
                     "search":search
                 }),
+                credentials: "include",
             }).then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -95,12 +94,10 @@ const Notification = () => {
     },[pages,sortBy,sortOrder,search])
 
     return (
-        <div className={`text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg text-[9px] sm:text-xs md:text-sm lg:text-md mb-16 md:mb-0`}>
+        <div className={`text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} rounded-lg text-[9px] sm:text-xs md:text-sm lg:text-md mb-16 md:mb-0`}>
             <button 
                 onClick={() => setMassNotificationOpen(true)}
-                className=" px-4 py-2 rounded mb-6"
-            
-                style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                className={`px-4 py-2 rounded mb-6 ${themeValue.theme}`}>
                 Mass Notification
             </button>
             <NotificationFilter 
@@ -115,8 +112,7 @@ const Notification = () => {
                 {/* <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
                 </div> */}
                 <div className="overflow-x-auto">
-                <table className={`min-w-full leading-normal shadow-md rounded-lg overflow-hidden bg-gray-${theme2}`} 
-                style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                <table className={`min-w-full leading-normal shadow-md rounded-lg overflow-hidden ${themeValue.theme}`} 
                 >
                     <thead >
                     <tr>

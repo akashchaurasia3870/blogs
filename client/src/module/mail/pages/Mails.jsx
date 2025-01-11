@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import MailItem from '../component/MailItem';
 import MailFilter from '../component/MailFilter';
 import Pagination from '../../../global_components/pagination/pagination';
 import ReplyPopup from '../component/ReplyPopup';
 import MassEmailPopup from '../component/MassEmailPopup';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import api_url from '../../../utils/utils';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Mails = () => {
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
     const [mails, setMails] = useState([]);
-
+    const {themeValue} = useTheme();
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('date');
     const [search, setSearch] = useState('');
@@ -170,9 +169,9 @@ const Mails = () => {
                 method: 'POST', // Assuming you are sending a POST request
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: JSON.stringify(mailData),
+                credentials: "include",
             });
     
             if (!response.ok) {
@@ -220,7 +219,6 @@ const Mails = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization": localStorage.getItem("token")
                 },
                 body: JSON.stringify({
                     pages,
@@ -229,6 +227,7 @@ const Mails = () => {
                     "sort_order":sortOrder,
                     "search":search
                 }),
+                credentials: "include",
             }).then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -255,12 +254,11 @@ const Mails = () => {
     
 
     return (
-        <div className={`text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg text-[9px] sm:text-xs md:text-sm lg:text-md mb-12 md:mb-0`}>
+        <div className={`text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} rounded-lg text-[9px] sm:text-xs md:text-sm lg:text-md mb-12 md:mb-0`}>
             <button 
                 onClick={() => setMassEmailOpen(true)}
-                className=" px-4 py-2 rounded mb-6"
+                className={`${themeValue.theme} px-4 py-2 rounded mb-6`}>
             
-                style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
                 Mass Email
             </button>
             <MailFilter 
@@ -286,9 +284,7 @@ const Mails = () => {
                         {/* <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
                         </div> */}
                         <div className="overflow-x-auto">
-                        <table className="w-full leading-normal shadow-md rounded-lg overflow-hidden" 
-                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
-                        >
+                        <table className={`w-full leading-normal shadow-md rounded-lg overflow-hidden ${themeValue.theme}`}>
                             <thead >
                             <tr>
                                 <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">

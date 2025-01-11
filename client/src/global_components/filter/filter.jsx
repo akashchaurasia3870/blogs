@@ -2,14 +2,11 @@
 
 import React, { useContext, useState } from 'react';
 import { FaThLarge, FaThList } from 'react-icons/fa';
-import { BlogDataContext } from '../../context/Blog_Context';
+import { useTheme } from '../../context/ThemeContext';
 
 const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
 
-    let {user_data, setUserData,blog_data, setBlogData,
-        authors_data, setAuthorsData,similier_data, 
-        setSimilierData,trainding_data, setTrandingData,setFontStyle,setFontWeight,setTheme,setTheme2,setBackgroundImage,setFontSize,theme,theme2,fontColor,fontStyle,fontWeight}  = useContext(BlogDataContext);
-
+    const {themeValue} = useTheme();
 
     const [searchTerm, setSearchTerm] = useState('');
     const [sortOption, setSortOption] = useState('');
@@ -31,8 +28,7 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
     };
 
     return (
-        <div className={`p-2 md:p-4 my-3 md:my-4 rounded-lg flex flex-row justify-between items-center text-${fontColor}-600 ${fontWeight} ${fontStyle} w-full text-[10px] sm:text-sm md:text-md lg:text-lg`} 
-        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+        <div className={`p-2 md:p-4 my-3 md:my-4 rounded-lg flex flex-row justify-between items-center text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle} ${themeValue.bgvalue2} w-full text-[10px] sm:text-sm md:text-md lg:text-lg `} 
         >
             <div className="w-[40%] md:mb-0">
                 <input
@@ -40,7 +36,7 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
                     value={searchTerm}
                     onChange={handleSearchChange}
                     placeholder="Search..."
-                    className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    className={`w-full p-2 border rounded-md shadow-sm focus:ring-white-300 focus:border-white-300 ${themeValue.theme}`}
                 />
             </div>
 
@@ -48,7 +44,7 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
                 <select
                     value={sortOption}
                     onChange={handleSortChange}
-                    className=" p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    className={`p-2 border rounded-md shadow-sm focus:ring-white-100 focus:border-white-100 ${themeValue.theme}`}
                 >
                     <option value="" disabled selected>Sort by</option>
                     <option value="title">Title</option>
@@ -60,7 +56,7 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
 
                 <button
                     onClick={toggleGridLayout}
-                    className="p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 hidden md:block"
+                    className={`p-2 border border-gray-300 rounded-md shadow-sm focus:ring-white-500 focus:border-white-500 hidden md:block ${themeValue.theme}`}
                     title="Toggle Grid/List Layout"
                 >
                     {isGrid ? <FaThList className="text-lg" /> : <FaThLarge className="text-lg" />}

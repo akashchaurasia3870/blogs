@@ -24,7 +24,9 @@ userRouter.post('/signup', Logs, async (req, res) => {
 
         const { username, email, password } = req.body;
         const result = await signUp(username, email, password);
-        res.status(201).json(result);
+        
+        res.cookie('token',result.token,{httpOnly:true,secure:false})
+        res.status(201).json({message: 'User Signed Up successfully', success: true,statusCode:201});
     } catch (error) {
         res.status(error.statusCode || 500).json({ message: error.message });
     }
@@ -34,7 +36,9 @@ userRouter.post('/signin', Logs, async (req, res) => {
     try {
         const { email, password } = req.body;
         const result = await signIn(email, password);
-        res.status(200).json(result);
+                
+        res.cookie('token',result.token,{httpOnly:true,secure:false})
+        res.status(200).json({message: 'User Signed In successfully', success: true,statusCode:200});
     } catch (error) {
         res.status(error.statusCode || 500).json({ message: error.message });
     }

@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import image_ref_c from '../../../assets/img/img1.jpg';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import api_url from '../../../utils/utils';
+import { useTheme } from '../../../context/ThemeContext';
 const Home = ({menuChange}) => {
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
+    const {themeValue} = useTheme();
     let [blogItems,setBlogItems] = useState(null);
     let [userItems,setUserItems] = useState(null);
     let [mailItems,setMailItems] = useState(null);
@@ -29,7 +28,7 @@ const Home = ({menuChange}) => {
     };
 
     const renderCard = (title, items, type) => (
-        <div className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 text-[11px] sm:text-sm md:text-md lg:text-md`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+        <div className={` text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} shadow-md rounded-lg p-4 text-[11px] sm:text-sm md:text-md lg:text-md ${themeValue.theme} relative`}>
           <p className="font-bold mb-2 text-xl">{title}</p>
           <ul className="list-none">
             {items?.length>0 && items.map((item, index) => (
@@ -43,8 +42,8 @@ const Home = ({menuChange}) => {
                       className="w-16 h-16 rounded-md mr-4"
                     />
                     <div className=''>
-                      <p className={`text-${fontColor}-900 font-semibold`}>{item?.subject}</p>
-                      <p className={`text-${fontColor}-600`}>
+                      <p className={`text-${themeValue.fontcolor}-900 font-semibold`}>{item?.subject}</p>
+                      <p className={`text-${themeValue.fontcolor}-500`}>
                         {formatDate(item?.date_created)}
                       </p>
                     </div>
@@ -58,8 +57,8 @@ const Home = ({menuChange}) => {
                       className="w-16 h-16 rounded-md mr-4"
                     />
                     <div>
-                      <p className={`text-${fontColor}-900 font-semibold`}>{item.title}</p>
-                      <p className={`text-${fontColor}-600`}>
+                      <p className={`text-${themeValue.fontcolor}-900 font-semibold`}>{item.title}</p>
+                      <p className={`text-${themeValue.fontcolor}-500`}>
                         {formatDate(item.dateEntered)}
                       </p>
                     </div>
@@ -68,23 +67,16 @@ const Home = ({menuChange}) => {
               </li>
             ))}
           </ul>
-          <p
-            className={` text-${fontColor}-600 cursor-pointer hover:underline`}
-            onClick={() => menuChange(title)}
-          >
-            See More
-          </p>
+          <p className={`text-${themeValue.fontcolor}-500 cursor-pointer hover:underline absolute bottom-2`} onClick={() => menuChange(title)}>See More</p>
         </div>
     );
       
     const renderCountCard = (title, count, theme) => (
-        <div className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 text-center text-[11px] sm:text-sm md:text-md lg:text-lg`} style={{backgroundColor:theme=='black'?'#e2e8f0':'#1e293b'}}>
+        <div className={` text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} shadow-md rounded-lg p-4 text-center text-[11px] sm:text-sm md:text-md lg:text-lg ${themeValue.theme}`}>
             <p className="font-bold mb-2">{title}</p>
             <span className="font-bold">{count}</span>
         </div>
     );
-
-    
 
     useEffect(()=>{
       const getDashData = async () => {
@@ -92,9 +84,9 @@ const Home = ({menuChange}) => {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
-              "Authorization": localStorage.getItem("token")
           },
           body: JSON.stringify({}),
+          credentials: "include",
       }).then((response) => {
           if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -183,7 +175,7 @@ const Home = ({menuChange}) => {
                 {renderCountCard('Mails', totalCountContainer.mails,'#bbccdd')}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-6 md:mb:0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 md:mb:0">
                 {renderCard('Blogs', blogItems,1)}
                 {renderCard('Users', userItems,1)}
                 {renderCard('Notifications', notificationItems,1)}

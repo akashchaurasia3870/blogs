@@ -1,29 +1,26 @@
-import React, { useContext, useState } from 'react'
-import { BlogDataContext } from '../../context/Blog_Context';
+import React, { useState } from 'react'
 import api_url from '../../utils/utils';
 
 import contact_img from '../../assets/img/contact.png'
+import { useTheme } from '../../context/ThemeContext';
 
 function Contact() {
-    let { theme,theme2,fontColor,fontStyle,fontWeight}  = useContext(BlogDataContext);
 
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
-
+    const {themeValue} = useTheme();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const contactInfo = { email, subject, message };
 
-        // Validate that all fields are filled
         if (!email || !subject || !message) {
             alert('Please fill out all fields before submitting.');
             return;
         }
 
-        // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             alert('Please enter a valid email address.');
@@ -34,9 +31,9 @@ function Contact() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization": localStorage.getItem("token")
                 },
                 body: JSON.stringify(contactInfo),
+                credentials: "include",
             }).then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -45,10 +42,9 @@ function Contact() {
             })
             .then((result) => {
                 alert('Message sent successfully!');
-                // Optionally reset the form fields
-                // setEmail('');
-                // setSubject('');
-                // setMessage('');
+                setEmail('');
+                setSubject('');
+                setMessage('');
             })
             .catch((error) => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -60,8 +56,7 @@ function Contact() {
 
     return (
         <div>
-            <div className={`flex flex-col md:flex-row p-2 md:p-6 rounded-lg shadow-lg text-${fontColor}-600 ${fontWeight} ${fontStyle}`}
-            style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+            <div className={`flex flex-col md:flex-row p-2 md:p-6 rounded-lg shadow-lg text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 ${themeValue.bgvalue2}`}
             >
                 <div className="md:w-1/2 md:mb-0 max-h-[50vh] flex items-center justify-center mx-1">
                 

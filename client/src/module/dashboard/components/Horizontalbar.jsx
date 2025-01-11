@@ -13,13 +13,11 @@ import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { IoMail } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
-import { BlogDataContext } from '../../../context/Blog_Context';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Horizontalbar = ({ menuChange }) => {
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
-
+    const {themeValue} = useTheme();
     let [showMenu, setShowMenu] = useState(true);
     let menu_items = ['Home', 'Blogs', 'Users', 'Notifications', 'Mails','Accounts','Settings'];
 
@@ -42,11 +40,11 @@ const Horizontalbar = ({ menuChange }) => {
 
     // }, [showMenu])
     return (
-        <div className={`w-screen text-${fontColor}-600 ${fontWeight} ${fontStyle} w-auto transition-all ease-in-out duration-500 fixed bottom-0`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+        <div className={`w-screen text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} w-auto transition-all ease-in-out duration-500 fixed bottom-0 ${themeValue.bgvalue2}`}>
             <ul className="mt-4 flex flex-row items-center justify-between">
                 {menu_items.map((item) => (
                     <li key={item} className="pb-3" onClick={() => menuChange(item)}>
-                        <div className={`flex flex-col justify-between items-center text-xl p-2 mx-2 rounded-md hover:bg-black hover:text-white transition-all ease-in duration-300 cursor-pointer bg-${theme}`}>
+                        <div className={`flex flex-col justify-between items-center text-xl p-2 mx-2 rounded-md hover:bg-black hover:text-white transition-all ease-in duration-300 cursor-pointer`}>
                             <div className="flex items-center justify-center">{menu_logo[item]}</div>
                             {/* <div className={`menu_title ml-5 ${showMenu ? 'block' : 'hidden'}`}>{item}</div> */}
                         </div>

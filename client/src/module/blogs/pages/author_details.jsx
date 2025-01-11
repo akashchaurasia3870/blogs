@@ -4,15 +4,13 @@ import AuthorBio from '../components/author_bio';
 import AuthorsBlogs from '../components/author_blogs';
 import MoreAuthors from '../components/more_authors'
 import api_url from '../../../utils/utils';
-import { useContext, useEffect, useState } from 'react';
-import PopularAuthors from '../components/populer_author';
-import { BlogDataContext } from '../../../context/Blog_Context';
+import { useEffect, useState } from 'react';
 import UserBio from '../components/user_bio';
+import { useTheme } from '../../../context/ThemeContext';
 
 const AuthorDetails = () => {
 
-    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
-  
+    const {themeValue} = useTheme();
     let {author_id} = useParams();
     let [blogs_data,setBlogsData] = useState([]);
     let [author_data,setAuthorData] = useState([]);
@@ -25,9 +23,9 @@ const AuthorDetails = () => {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": localStorage.getItem("token"),
                     },
-                    body:JSON.stringify({author_id})
+                    body:JSON.stringify({author_id}),
+                    credentials: "include",
                 });
                 if (response.ok) {
                     const data = await response.json();
@@ -46,7 +44,7 @@ const AuthorDetails = () => {
     }, [author_id]);
 
     return (
-      <div className={`mx-auto p-3 md:p-6 bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
+      <div className={`mx-auto p-3 md:p-6 text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 ${themeValue.theme}`}>
         <UserBio author_data={author_data} />
         <AuthorsBlogs blogs_data={blogs_data} />
       </div>
