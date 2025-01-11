@@ -35,7 +35,7 @@ export const BlogDataProvider = ({ children }) => {
     
     return (
         <BlogDataContext.Provider value={BlogContextValue}>
-            <div className={`${fontWeight} ${fontStyle} text-${fontColor} bg-slate-200 `}>
+            <div>
               {children}
             </div>
         </BlogDataContext.Provider>

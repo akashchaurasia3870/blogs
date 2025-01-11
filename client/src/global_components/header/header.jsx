@@ -7,7 +7,7 @@ import { useTheme } from '../../context/ThemeContext';
 import ToggleTheme from '../toogle_theme/theme_toogle';
 function Navbar() {
 
-    const is_login = document.cookie.includes("token=");
+    const is_login = true;
     let nevigate = useNavigate(); 
     const {themeValue} = useTheme();
 
