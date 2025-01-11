@@ -1,15 +1,14 @@
-import React, { useContext } from 'react'
-import { BlogDataContext } from '../../context/Blog_Context';
+import React from 'react'
+import { useTheme } from '../../context/ThemeContext';
 
 function NewsLatter() {
 
-    let { theme,theme2,fontColor,fontStyle,fontWeight}  = useContext(BlogDataContext);
+    const {themeValue} = useTheme();
 
     return (
-        <div className='flex items-center justify-between rounded-lg text-xs md:text-lg lg:text-sm'
-        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+        <div className={`flex items-center justify-between rounded-lg text-xs md:text-lg lg:text-sm ${themeValue.bgvalue2}`}
         >
-            <div className={`flex flex-col md:flex-row items-center justify-around p-6 rounded-lg text-${fontColor}-600 ${fontWeight} ${fontStyle} w-full`}>
+            <div className={`flex flex-col md:flex-row items-center justify-around p-6 rounded-lg text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 w-full`}>
             <div className="flex flex-col items-center justify-center mb-4 md:mb-0 w-full md:w-[50%] text-center">
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold ">Stay Updated!</h2>
                 <p className="">Subscribe to our newsletter for the latest updates and offers.</p>

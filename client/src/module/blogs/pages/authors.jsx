@@ -3,30 +3,24 @@ import dummy_data from '../../../assets/data/data.json';
 import authors_dummy_data from '../../../assets/data/authos_data.json';
 import img5 from '../../../assets/img/img5.jpg'
 import { Link } from 'react-router-dom';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import Filter from '../../../global_components/filter/filter';
 import UserCard from '../components/user_card';
 import Pagination from '../../../global_components/pagination/pagination';
 import api_url from '../../../utils/utils';
+import { useTheme } from '../../../context/ThemeContext';
 
 function Authors() {
 
-    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
-
-    const [layout, setLayout] = useState(true); // true for grid, false for list
-    const [loading, setLoading] = useState(true); // true for grid, false for list
-
-
+    const {themeValue} = useTheme();
+    const [layout, setLayout] = useState(true);
+    const [loading, setLoading] = useState(true);
     const handleSearch = (searchTerm) => {
-        // Handle search logic
         setFilterData(prevState=>({
             ...prevState,
             search:searchTerm
         }))
     };
-
     const handleSort = (sortOption) => {
-        // Handle sort logic
         setFilterData(prevState=>({
             ...prevState,
             option:sortOption
@@ -35,7 +29,6 @@ function Authors() {
 
     const handleLayoutChange = (isGrid) => {
         setLayout(isGrid);
-        // Handle layout change logic
     };
 
     const [filter_data,setFilterData] = useState({
@@ -53,13 +46,13 @@ function Authors() {
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",
-                        "Authorization":localStorage.getItem("token")
                     },
                     body:JSON.stringify({
                         search:'',
                         limit:10,
                         page:1
-                    })
+                    }),
+                    credentials: "include",
                 })
     
                 if(response.ok){
@@ -92,14 +85,13 @@ function Authors() {
     }
 
     return (
-        <section className={`min-h-[100vh] authors w-full bg-${theme} px-2 md:px-4 flex flex-col justify-start items-center text-[9px] sm:text-sm md:text-md lg:text-lg`}>
+        <section className={`authors w-full ${themeValue.theme} text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 px-2 md:px-4 flex flex-col justify-start items-center text-[9px] sm:text-sm md:text-md lg:text-lg`}>
 
             <Filter onSearch={handleSearch} onSort={handleSort} onLayoutChange={handleLayoutChange} />
         
             {authorData.length > 0 ?
 
-                <div className={`py-2 w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 rounded-lg min-h-[80vh]`}
-                style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                <div className={`py-2 w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 rounded-lg min-h-[80vh`}
                 >
                     {authorData.map((author) => {
                         return (

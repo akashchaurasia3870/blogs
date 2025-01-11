@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import { BlogDataContext } from '../../context/Blog_Context';
+import React from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 function Footer() {
 
-    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
+    const {themeValue} = useTheme();
+
   
     return (
-        <footer className={`py-4 md:py-8 text-${fontColor}-600 ${fontWeight} ${fontStyle} text-sm md:text-lg lg:text-sm`}
-        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+        <footer className={`py-4 md:py-8 text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 ${themeValue.bgvalue2} text-sm md:text-lg lg:text-sm`}
 >
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">

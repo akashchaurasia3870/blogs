@@ -95,14 +95,14 @@ const Slider = ({ width = '100%', height = '100vh' }) => {
                 ))}
             </div>
             <button
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 z-10"
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-sm hover:bg-opacity-75 z-10"
                 onClick={goToPreviousSlide}
                 disabled={isAnimating}
             >
                 &lt;
             </button>
             <button
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 z-10"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-sm hover:bg-opacity-75 z-10"
                 onClick={goToNextSlide}
                 disabled={isAnimating}
             >

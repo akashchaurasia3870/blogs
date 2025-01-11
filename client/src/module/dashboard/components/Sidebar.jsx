@@ -13,13 +13,10 @@ import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { IoMail } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
-import { BlogDataContext } from '../../../context/Blog_Context';
-
+import { useTheme } from '../../../context/ThemeContext';
 const Sidebar = ({ onMenuItemClick }) => {
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
-
+    const {themeValue} = useTheme();
     let [showMenu, setShowMenu] = useState(true);
     let menu_items = ['Home', 'Blogs', 'Users', 'Notifications', 'Mails','Accounts'];
 
@@ -42,7 +39,7 @@ const Sidebar = ({ onMenuItemClick }) => {
 
     // }, [showMenu])
     return (
-        <div className={`h-screen text-${fontColor}-600 ${fontWeight} ${fontStyle} w-auto transition-all ease-in-out duration-500 relative hidden md:block`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+        <div className={`h-screen text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} w-auto transition-all ease-in-out duration-500 relative hidden md:block ${themeValue.theme}`}>
             <div className={`p-4 font-bold text-xl  menu_items flex justify-${showMenu?'start':'center'} items-center relative text-[1.5rem] cursor-pointer mt-2`}>
 
                 <div className={`menu_icons flex items-center justify-center`} onClick={() => { handleMenuChange(true) }}><RxDashboard /></div>
@@ -55,7 +52,7 @@ const Sidebar = ({ onMenuItemClick }) => {
             <ul className="mt-4">
                 {menu_items.map((item) => (
                     <li key={item} className="pb-3" onClick={() => onMenuItemClick(item)}>
-                        <div className={`menu_items flex justify-${showMenu?'start':'center'} items-center text-[1.2rem] p-4 mx-6 rounded-md hover:bg-black hover:text-white transition-all ease-in duration-300 cursor-pointer ${showMenu ? 'mx-12' : 'mx-4'} bg-${theme}`}>
+                        <div className={`menu_items flex justify-${showMenu?'start':'center'} items-center text-[1.2rem] p-4 mx-6 rounded-md hover:${themeValue.bgvalue6} hover:text-white transition-all ease-in duration-300 cursor-pointer ${showMenu ? 'mx-12' : 'mx-4'} ${themeValue.bgvalue2}`}>
                             <div className="menu_icons flex items-center justify-center">{menu_logo[item]}</div>
                             <div className={`menu_title ml-5 ${showMenu ? 'block' : 'hidden'}`}>{item}</div>
                         </div>

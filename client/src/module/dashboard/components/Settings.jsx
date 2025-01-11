@@ -1,23 +1,24 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { BlogDataContext } from '../../../context/Blog_Context';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Settings = () => {
-    const { theme, setTheme,theme2, setTheme2, fontSize, setFontSize, fontColor, setFontColor, fontWeight, setFontWeight, fontStyle, setFontStyle, backgroundImage, setBackgroundImage , handleInputChange ,updateThemeData,getThemeData } = useContext(BlogDataContext);
-
+    const { theme, setTheme, setTheme2, fontColor, setFontColor, fontWeight, setFontWeight, fontStyle, setFontStyle , handleInputChange ,updateThemeData,getThemeData } = useContext(BlogDataContext);
+    const {themeValue} = useTheme();
     useEffect(()=>{
         getThemeData()
     },[]);
 
     return (
-        <div className={`p-2 md:p-6 bg-${theme} text-${fontColor}-500 ${fontWeight} ${fontStyle}`}>
+        <div className={`p-2 md:p-6 text-${fontColor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle}`}>
            
-            <p className={`font-bold mb-2 text-3xl text-${fontColor}-600 ${fontWeight} ${fontStyle} ml-4 `}>Settings</p>
+            <p className={`font-bold mb-2 text-3xl text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} ml-4 `}>Settings</p>
 
             <div className={`flex flex-col mb-12 md:mb-0`}>
                 <div className={`w-full p-2 flex flex-wrap flex-row`}>
                     {/* Theme */}
-                    <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
-                        <span className={`block text-lg mb-2 text-${fontColor}-600`}>Theme</span>
+                    <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg ${themeValue.theme}`}>
+                        <span className={`block text-lg mb-2 text-${themeValue.fontcolor}-500`}>Theme</span>
                         <div className={`flex flex-col items-start justify-between`}>
                             <p className={`inline-flex items-center my-1`}>
                                 <input
@@ -28,7 +29,7 @@ const Settings = () => {
                                     onChange={(e) => {setTheme(e.target.value), handleInputChange(e),setTheme2('200')}}
                                     className={`form-radio`}
                                 />
-                                <span className={`ml-2 text-${fontColor}-600`}>Light</span>
+                                <span className={`ml-2 text-${themeValue.fontcolor}-500`}>Light</span>
                             </p>
                             <p className={`inline-flex items-center my-1`}>
                                 <input
@@ -39,15 +40,15 @@ const Settings = () => {
                                     onChange={(e) => {setTheme(e.target.value), handleInputChange(e),setTheme2('800')}}
                                     className={`form-radio text-indigo-600`}
                                 />
-                                <span className={`ml-2 text-${fontColor}-600`}>Dark</span>
+                                <span className={`ml-2 text-${themeValue.fontcolor}-500`}>Dark</span>
                             </p>
                         </div>
                     </div>
 
                     
                     {/* Font Style */}
-                    <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
-                    <span className={`block text-lg mb-2 text-${fontColor}-600`}>Font Style</span>
+                    <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg ${themeValue.theme}`} >
+                    <span className={`block text-lg mb-2 text-${themeValue.fontcolor}-500`}>Font Style</span>
                         <div className={`flex flex-col items-start justify-between`}>
                             <p className={`inline-flex items-center my-1`}>
                                 <input
@@ -58,7 +59,7 @@ const Settings = () => {
                                     onChange={(e) => {setFontStyle(e.target.value), handleInputChange(e)}}
                                     className={`form-radio text-indigo-600`}
                                 />
-                                <span className={`text-${fontColor}-600`}>Normal</span>
+                                <span className={`text-${themeValue.fontcolor}-500`}>Normal</span>
                             </p>
                             <p className={`inline-flex items-center my-1`}>
                                 <input
@@ -69,14 +70,14 @@ const Settings = () => {
                                     onChange={(e) => {setFontStyle(e.target.value), handleInputChange(e)}}
                                     className={`form-radio text-indigo-600`}
                                 />
-                                <span className={`text-${fontColor}-600`}>Italic</span>
+                                <span className={`text-${themeValue.fontcolor}-500`}>Italic</span>
                             </p>
                         </div>
                     </div>
 
                     {/* Font Size */}
-                    {/* <div className={`shadow-md p-4 w-full`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
-                        <span className={`block text-lg mb-2 text-${fontColor}-600`}>Theme</span>                    <div className={`grid grid-cols-3 gap-4`}>
+                    {/* <div className={`shadow-md p-4 w-full`} >
+                        <span className={`block text-lg mb-2 text-${themeValue.fontcolor}-500`}>Theme</span>                    <div className={`grid grid-cols-3 gap-4`}>
                         {['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl'].map((sizeClass, index) => (
                         <p key={index} className={`flex items-center cursor-pointer`}>
                             <input
@@ -96,8 +97,8 @@ const Settings = () => {
 
 
                     {/* Font Color */}
-                    <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
-                    <span className={`block text-lg mb-2 text-${fontColor}-600`}>Font Color</span>
+                    <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg ${themeValue.theme}`} >
+                    <span className={`block text-lg mb-2 text-${themeValue.fontcolor}-500`}>Font Color</span>
                         <div className={`flex flex-col items-start justify-between`}>
                             <p className={`inline-flex items-center my-1`}>
                                 <input
@@ -171,8 +172,8 @@ const Settings = () => {
 
 
                     {/* Font Weight */}
-                    <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
-                    <span className={`block text-lg mb-2 text-${fontColor}-600`}>Font Weight</span>
+                    <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg ${themeValue.theme}`} >
+                    <span className={`block text-lg mb-2 text-${themeValue.fontcolor}-500`}>Font Weight</span>
                         <div className={`flex flex-col items-start justify-between`}>
                                 <p className={`inline-flex items-center my-1`}>
                                     <input
@@ -184,7 +185,7 @@ const Settings = () => {
 
                                         className={`form-radio text-indigo-600`}
                                     />
-                                    <span className={`ml-2 text-${fontColor}-600`}>Light</span>
+                                    <span className={`ml-2 text-${themeValue.fontcolor}-500`}>Light</span>
                                 </p>
                                 <p className={`inline-flex items-center my-1`}>
                                     <input
@@ -196,7 +197,7 @@ const Settings = () => {
 
                                         className={`form-radio text-indigo-600`}
                                     />
-                                    <span className={`ml-2 text-${fontColor}-600`}>Normal</span>
+                                    <span className={`ml-2 text-${themeValue.fontcolor}-500`}>Normal</span>
                                 </p>
                                 <p className={`inline-flex items-center my-1`}>
                                     <input
@@ -208,7 +209,7 @@ const Settings = () => {
 
                                         className={`form-radio text-indigo-600`}
                                     />
-                                    <span className={`ml-2 text-${fontColor}-600`}>Semi-Bold</span>
+                                    <span className={`ml-2 text-${themeValue.fontcolor}-500`}>Semi-Bold</span>
                                 </p>
                                 <p className={`inline-flex items-center my-1`}>
                                     <input
@@ -220,7 +221,7 @@ const Settings = () => {
 
                                         className={`form-radio text-indigo-600`}
                                     />
-                                    <span className={`ml-2 text-${fontColor}-600`}>Bold</span>
+                                    <span className={`ml-2 text-${themeValue.fontcolor}-500`}>Bold</span>
                                 </p>
                         </div>
                     </div>

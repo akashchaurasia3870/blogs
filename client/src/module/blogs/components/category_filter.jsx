@@ -37,7 +37,7 @@ const CategoryComponent = () => {
                 <button
                     key={category.id}
                     onClick={() => handleCategoryClick(category.slug)}
-                    className="flex-shrink-0 mx-6 my-2 w-20 h-20 rounded-full text-white hover:opacity-90 hover:scale-[1.05] transition duration-300"
+                    className="flex-shrink-0 mx-6 my-2 w-20 h-20 rounded-sm text-white hover:opacity-90 hover:scale-[1.05] transition duration-300"
                     style={{ backgroundColor: category.theme }}
                 >
                     <span className="flex items-center justify-center h-full text-center p-2 text-[12px]">

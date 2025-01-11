@@ -2,14 +2,12 @@ import React, { useContext } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { BlogDataContext } from '../../context/Blog_Context';
+import { useTheme } from '../../context/ThemeContext';
 
 const Post_Slider = ({ posts, renderSlide, title ,slidesToShow = 10 }) => {
 
-    let { theme,theme2,fontColor,fontStyle,fontWeight ,
-        authors_data, setAuthorsData,similier_data, 
-        setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
-    
+        const {themeValue} = useTheme();
+        
     const settings = {
         dots: false,
         infinite: true,
@@ -41,9 +39,9 @@ const Post_Slider = ({ posts, renderSlide, title ,slidesToShow = 10 }) => {
     };    
 
     return (
-        <div className="mt-5" 
+        <div className="mt-5 my_slider z-0" 
         >
-            <h3 className={`font-bold text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>{title}</h3>
+            <h3 className={`font-bold text-${themeValue.fontsize} text-${themeValue.fontcolor}-500`}>{title}</h3>
 
             <Slider {...settings} className=''>
                 {posts.map((post, index) => (

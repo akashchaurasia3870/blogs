@@ -1,18 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
-import image_ref_c from '../../../assets/img/img1.jpg'
-import DashBlogItem from './DashBlogItem/DashBlogItem';
-import { BlogDataContext } from '../../../context/Blog_Context';
 import { CSVDownload } from "react-csv";
 import api_url, { exportPdf } from '../../../utils/utils';
 import { MdDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
-
-
+import { useTheme } from '../../../context/ThemeContext';
 
 const Blogs = () => {
 
-    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
+    const {themeValue} = useTheme();
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('name');
     const [selectedBlog, setSelectedBlog] = useState(null);
@@ -84,7 +80,6 @@ const Blogs = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=UTF-8",
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: JSON.stringify({
                     pages,
@@ -93,7 +88,7 @@ const Blogs = () => {
                     "sort_order":sortOrder,
                     "search":search
                 }),
-
+                credentials: "include",
             }
         )
         .then(response => {
@@ -124,13 +119,13 @@ const Blogs = () => {
         <div className="p-0 md:px-4 min-h-[86vh] flex flex-col justify-between pb-4 text-[9px] sm:text-xs md:text-sm lg:text-md mb-16 md:mb-0">
             <div className='w-full'>
                 <div className="flex justify-between items-center mb-2">
-                    <h3 className={`font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Blogs</h3>
+                    <h3 className={` text-${themeValue.fontcolor}-600 text-${themeValue.fontstyle} font-${themeValue.fontweight}`}>Blogs</h3>
                     <div className="flex space-x-2">
-                        <span className={`p-1 md:p-2 rounded bg-gray-${theme2} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight} text-center `} onClick={()=>{
+                        <span className={`p-1 md:p-2 rounded cursor-pointer text-${themeValue.fontcolor}-600 text-${themeValue.fontstyle} font-${themeValue.fontweight} text-center ${themeValue.theme}`} onClick={()=>{
                             exportPdf(blogs)
                         }}>Export PDF</span>
 
-                        <span className={` rounded p-1 md:p-2 bg-gray-${theme2} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight} `} onClick={handleDownload}>Export Excel</span>
+                        <span className={` rounded p-1 md:p-2 cursor-pointer text-${themeValue.fontcolor}-600 text-${themeValue.fontstyle} font-${themeValue.fontweight} ${themeValue.theme}`} onClick={handleDownload}>Export Excel</span>
                          {download && (
                             <CSVDownload
                             data={blogs}
@@ -140,7 +135,7 @@ const Blogs = () => {
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className={`rounded p-1 md:p-2 bg-gray-${theme2} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                            className={`rounded p-1 md:p-2 text-${themeValue.fontcolor}-600 text-${themeValue.fontstyle} font-${themeValue.fontweight} `}
                         >
                             <option value="name">Sort by Name</option>
                             <option value="date">Sort by Date</option>
@@ -149,7 +144,7 @@ const Blogs = () => {
                         <select
                             value={sortOrder}
                             onChange={(e) => setSortOrder(e.target.value)}
-                            className={`rounded p-1 md:p-2 bg-gray-${theme2} text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
+                            className={`rounded p-1 md:p-2 text-${themeValue.fontcolor}-600 text-${themeValue.fontstyle} font-${themeValue.fontweight}`}
                         >
                             <option value="asc">Asc</option>
                             <option value="desc">Desc</option>
@@ -160,10 +155,10 @@ const Blogs = () => {
                         <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
                         </div>
                         <div className="overflow-x-auto">
-                        <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden" 
-                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                        <table className={`min-w-full leading-normal shadow-md rounded-lg overflow-hidden ${themeValue.theme}`}
+                        
                         >
-                            <thead className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>
+                            <thead className={`text-${themeValue.fontcolor}-600 text-${themeValue.fontstyle} font-${themeValue.fontweight}`}>
                             <tr>
                                 <th className="px-5 py-3 border-b-2 text-left font-semibold uppercase tracking-wider">
                                 Image
@@ -181,7 +176,7 @@ const Blogs = () => {
                             </thead>
                             <tbody>
                             {blogs.map((item) => (
-                                <tr key={item.id} className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
+                                <tr key={item.id} className={`text-${themeValue.fontcolor}-600 text-${themeValue.fontstyle} font-${themeValue.fontweight}`}
                                 >
                                 <td className="px-5 py-5">
                                     <img src={api_url+item?.filePaths?.images} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
@@ -216,8 +211,8 @@ const Blogs = () => {
 
             {/* Modal */}
             {modalOpen && (
-                <div className={`font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight} fixed inset-0 flex items-center justify-center text-[9px] sm:text-xs md:text-sm lg:text-md`}>
-                <div className={`bg-${theme} p-6 rounded-lg shadow-lg w-full max-w-lg relative`}>
+                <div className={`font-bold  text-${themeValue.fontcolor}-600 text-${themeValue.fontstyle} font-${themeValue.fontweight} fixed inset-0 flex items-center justify-center text-[9px] sm:text-xs md:text-sm lg:text-md`}>
+                <div className={` p-6 rounded-lg shadow-lg w-full max-w-lg relative`}>
                     <button
                         onClick={closeModal}
                         className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl"

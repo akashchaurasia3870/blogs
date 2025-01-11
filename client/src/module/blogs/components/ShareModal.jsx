@@ -25,7 +25,7 @@ const ShareModal = ({ isOpen, onClose, postUrl }) => {
             <img
               src="https://img.icons8.com/fluency/24/facebook.png"
               alt="Facebook"
-              className="h-8 w-8 rounded-full"
+              className="h-8 w-8 rounded-sm"
             />
             <span>Share on Facebook</span>
           </button>
@@ -33,7 +33,7 @@ const ShareModal = ({ isOpen, onClose, postUrl }) => {
             <img
               src="https://img.icons8.com/fluency/24/twitter.png"
               alt="Twitter"
-              className="h-8 w-8 rounded-full"
+              className="h-8 w-8 rounded-sm"
 
             />
             <span>Share on Twitter</span>
@@ -42,7 +42,7 @@ const ShareModal = ({ isOpen, onClose, postUrl }) => {
             <img
               src="https://img.icons8.com/fluency/24/instagram-new.png"
               alt="Instagram"
-              className="h-8 w-8 rounded-full"
+              className="h-8 w-8 rounded-sm"
 
             />
             <span>Share on Instagram</span>
@@ -54,7 +54,7 @@ const ShareModal = ({ isOpen, onClose, postUrl }) => {
             <img
               src="https://img.icons8.com/fluency/24/link.png"
               alt="Copy Link"
-              className="h-8 w-8 rounded-full"
+              className="h-8 w-8 rounded-sm"
 
             />
             <span>Copy Link</span>

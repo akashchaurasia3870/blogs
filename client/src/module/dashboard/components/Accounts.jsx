@@ -1,12 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { BlogDataContext } from '../../../context/Blog_Context';
+import React, {useEffect, useState } from 'react';
 import api_url from '../../../utils/utils';
 const AccountPage = () => {
-
-    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
   
     let [image_url, setImageUrl] = useState(null);
-
     const [isEditable, setIsEditable] = useState(false);
     const [profileData, setProfileData] = useState({});
     const [originalData, setOriginalData] = useState({});
@@ -24,9 +20,9 @@ const AccountPage = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem("token"),
                 },
-            }); // Replace with actual API endpoint
+                credentials: "include",
+            }); 
             const data = await response.json();
 
             let data_c = {
@@ -100,9 +96,9 @@ const AccountPage = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": file.type,
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: binaryData,
+                credentials: "include",
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -168,9 +164,9 @@ const AccountPage = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: JSON.stringify({"update_feilds":update_feilds}),
+                credentials: "include",
             });
             if (response.ok) {
                 let data_c = {
@@ -195,7 +191,7 @@ const AccountPage = () => {
     };
 
     return (
-        <div className={`flex flex-col items-center justify-center min-h-screen bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle} p-4`} 
+        <div className={`flex flex-col items-center justify-center min-h-screen bg-${theme} text-${themeValue.fontcolor}-500 font-${themeValue.fontweight} text-${themeValue.fontstyle} p-4`} 
         >
             <div className="p-0 md:p-6 rounded-lg shadow-md w-full">
                 <div className="flex flex-col justify-center items-center ">
@@ -205,7 +201,7 @@ const AccountPage = () => {
                         <img
                             src={image_url}
                             alt=""
-                            className="rounded-full h-32 w-32 object-cover mb-4 shadow-md p-1 bg-gray-500"
+                            className="rounded-sm h-32 w-32 object-cover mb-4 shadow-md p-1 bg-gray-500"
                         />
                         {isEditable && (
                             <input
@@ -213,7 +209,7 @@ const AccountPage = () => {
                                 onChange={handleImageChange}
                                 className="p-2 rounded-lg  text-sm
                                            file:mr-4 file:py-2 file:px-4
-                                           file:rounded-full file:border-0
+                                           file:rounded-sm file:border-0
                                            file:text-sm file:font-semibold
                                             file:bg-blue-50 file:text-blue-700
                                             hover:file:bg-gray-400"

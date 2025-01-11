@@ -9,10 +9,12 @@ import api_url from '../../utils/utils'
 import { BlogDataContext } from '../../context/Blog_Context'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../loading/Loading'
+import { useTheme } from '../../context/ThemeContext'
 function Home() {
 
     let [isLoading, setIsLoading] = useState(true);
-
+    const {themeValue} = useTheme();
+    
     const slides = [
         {
             title: "One Piece",
@@ -60,9 +62,9 @@ function Home() {
 
     let navigate = useNavigate();
 
-    let {user_data, setUserData,blog_data, setBlogData,
+    let {
          authors_data, setAuthorsData,similier_data, 
-         setSimilierData,trainding_data, setTrandingData,setFontStyle,setFontWeight,setTheme,setTheme2,setBackgroundImage,setFontSize,theme,theme2,fontColor,fontStyle,fontWeight}  = useContext(BlogDataContext);
+         setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
 
     const [blogs_data, setBlogsData] = useState([]);
     const [layout, setLayout] = useState(true); // true for grid, false for list
@@ -102,9 +104,9 @@ function Home() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=UTF-8",
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: JSON.stringify(filter_data),
+                credentials: "include"
             }
         )
         .then(response => {
@@ -114,21 +116,12 @@ function Home() {
             return response.json();
         })
         .then(data => {            
-
             setBlogsData(data.blogs_data.data);
             setSimilierData(data.similier_data);
             setTrandingData(data.trending_data);
             setAuthorsData(data.writer_data);
-            setFontStyle(data.theme_data.fontColor);
-            setFontSize(data.theme_data.fontSize);
-            setFontWeight(data.theme_data.fontWeight);
-            setTheme(data.theme_data.theme);
-            if(data.theme=='white'){
-                setTheme2('200');
-            }else{
-                setTheme2('800');
-            }
-            setBackgroundImage(data.theme_data.backgroundStyle)
+
+            
 
             setTimeout(() => {
                 setIsLoading(false);
@@ -140,20 +133,18 @@ function Home() {
             setTimeout(() => {
                 setIsLoading(false);
             }, 2000)
-        
-            // localStorage.removeItem("token");
             navigate('/signin');
         });
     }, [filter_data]);
 
     return (
         <>
-            {
-                isLoading === true && <div className='loader'>
+        {
+            isLoading === true && <div className='loader'>
                     <Loading />
-                </div>
-            }
-        <div className={`bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
+            </div>
+        }
+        <div className={`${themeValue.theme} text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle}`}>
             <div className="pt-2 md:pt-6">
                 <HomeSlider slides={slides} />
             </div>

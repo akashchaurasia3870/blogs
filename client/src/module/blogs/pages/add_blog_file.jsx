@@ -36,9 +36,9 @@ const AddBlog = () => {
                     method: "POST",
                     headers: {
                         "Content-Type": file.type,
-                        "Authorization": localStorage.getItem("token"),
                     },
                     body: binaryData,
+                    credentials: "include",
                 })
                     .then((response) => response.json())
                     .then((data) => {
@@ -78,9 +78,9 @@ const AddBlog = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem("token"),
                 },
                 body: JSON.stringify(blogData),
+                credentials: "include",
             });
 
             if (response.ok) {
@@ -94,7 +94,6 @@ const AddBlog = () => {
                 });
             } else {
                 console.error("Failed to create blog.");
-                localStorage.removeItem("token");
                 navigate('/signin');
             }
         } catch (error) {
@@ -162,7 +161,7 @@ const AddBlog = () => {
                             onChange={(e) => handleFileUpload(Array.from(e.target.files), "image")}
                             className="mt-1 block w-full text-sm text-gray-500
                                 file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
+                                file:rounded-sm file:border-0
                                 file:text-sm file:font-semibold
                                 file:bg-blue-50 file:text-blue-700
                                 hover:file:bg-blue-100"
@@ -177,7 +176,7 @@ const AddBlog = () => {
                             onChange={(e) => handleFileUpload(Array.from(e.target.files), "video")}
                             className="mt-1 block w-full text-sm text-gray-500
                                 file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
+                                file:rounded-sm file:border-0
                                 file:text-sm file:font-semibold
                                 file:bg-blue-50 file:text-blue-700
                                 hover:file:bg-blue-100"
