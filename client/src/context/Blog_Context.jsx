@@ -17,7 +17,8 @@ export const BlogDataProvider = ({ children }) => {
     const [authors_data, setAuthorsData] = useState([]);
     const [similier_data, setSimilierData] = useState([]);
     const [trainding_data, setTrandingData] = useState([]);
-
+    const [is_login,setIsLogin] = useState(true);
+    const [isAdmin,setIsAdmin] = useState(true);
     const BlogContextValue = {
         user_data, 
         setUserData,
@@ -30,7 +31,11 @@ export const BlogDataProvider = ({ children }) => {
         trainding_data, 
         setTrandingData,
         blog_context_data, 
-        setContextData
+        setContextData,
+        is_login, 
+        setIsLogin,
+        isAdmin, 
+        setIsAdmin
     };
     
     return (

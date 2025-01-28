@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import api_url from '../../utils/utils';
 
-import contact_img from '../../assets/img/contact.png'
+import contact_img from '../../assets/img/contact.avif'
 import { useTheme } from '../../context/ThemeContext';
 
 function Contact() {
@@ -58,10 +58,10 @@ function Contact() {
         <div>
             <div className={`flex flex-col md:flex-row p-2 md:p-6 rounded-lg shadow-lg text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 ${themeValue.bgvalue2}`}
             >
-                <div className="md:w-1/2 md:mb-0 max-h-[50vh] flex items-center justify-center mx-1">
+                <div className="md:w-1/2 md:mb-0 max-h-[50vh] flex items-center justify-center mx-1 rounded-lg">
                 
-                    <img src={contact_img} alt="Contact Us" className="rounded-md mb-4 w-full h-[360px] object-contain p-0 md:p-6"/>
-                    {/* <div className='absolute inset-0 flex flex-col items-center justify-center text-center hidden'>
+                    <img src={contact_img} alt="Contact Us" className="mb-4 w-full h-[360px] object-cover p-0 md:p-6 rounded-lg"/>
+                    {/* <div className='absolute inset-0 flex flex-col items-center justify-center text-center '>
                         <h1 className="text-3xl ">Get in Touch</h1>
                         <p className="mt-2">We would love to hear from you. Please fill out the form to reach out to us.</p>
                     </div> */}

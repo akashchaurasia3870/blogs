@@ -4,8 +4,6 @@ import img2 from '../../assets/img/img2.jpg';
 import img3 from '../../assets/img/img1.jpg';
 import img4 from '../../assets/img/img4.jpg';
 import img5 from '../../assets/img/img5.jpg';
-import img1 from '../../assets/img/img1.jpg';
-import img1 from '../../assets/img/img1.jpg';
 
 const Slider = ({ width = '100%', height = '100vh' }) => {
     const slides = [
@@ -75,8 +73,8 @@ const Slider = ({ width = '100%', height = '100vh' }) => {
                 {slides.concat(slides[0]).map((slide, index) => (
                     <div
                         key={index}
-                        className="flex-shrink-0"
-                        style={{ width, height, backgroundColor: slide.bgColor }}
+                        className="flex-shrink-0 h-[50vh] w-full"
+                        // style={{ width, height, backgroundColor: slide.bgColor }}
                     >
                         <img
                             src={slide.image}

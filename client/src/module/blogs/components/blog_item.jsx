@@ -26,8 +26,8 @@ const BlogItem = ({ data }) => {
 
     let img_path = data.filePaths.images;
     img_path = api_url + img_path;
-    const short_desc = blog_data?.content?.length > 130 ? blog_data?.content?.substr(0, 50) + "..." : blog_data?.content;
-    const blog_title = blog_data?.caption?.length > 15 ? blog_data?.caption?.substr(0, 15) + "..." : blog_data?.caption;
+    const short_desc = blog_data?.content;
+    const blog_title = blog_data?.caption;
 
 
     const toggleLike = async (blog_id) => {
@@ -123,7 +123,7 @@ const BlogItem = ({ data }) => {
             <article className={`p-3 text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 ${themeValue.bgvalue2} rounded-[10px] w-full lg:w-3/4 lg:pr-8 flex flex-col justify-between mr-4`} 
             >
                 <Link to={`/blog/${blog_data.blog_id}`} state={{ blogData: blog_data }}>
-                    <div className="h-[200px] w-full">
+                    <div className="h-[60vh] w-full">
                         <img src={img_path} className='object-contain h-full w-full bg-gray-400 rounded-lg' />
                     </div>
                     <div className="blog_content">

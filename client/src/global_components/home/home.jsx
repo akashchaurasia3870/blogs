@@ -10,55 +10,11 @@ import { BlogDataContext } from '../../context/Blog_Context'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../loading/Loading'
 import { useTheme } from '../../context/ThemeContext'
+
 function Home() {
 
     let [isLoading, setIsLoading] = useState(true);
     const {themeValue} = useTheme();
-    
-    const slides = [
-        {
-            title: "One Piece",
-            description: "Join Luffy and the Straw Hat Pirates on their epic adventure.",
-            image: "", // No image, will show theme color
-            theme: "#471069",
-        },
-        {
-            title: "Naruto",
-            description: "Follow Naruto Uzumaki on his quest to become Hokage.",
-            image: "", // Image present, will show image
-            theme: "#ffb88e",
-        },
-        {
-            title: "Dragon Ball Z",
-            description: "Watch Goku and his friends defend Earth from powerful foes.",
-            image: "",
-            theme: "#f74c06",
-        },
-        {
-            title: "Attack on Titan",
-            description: "Humanity fights for survival against the fearsome Titans.",
-            image: "",
-            theme: "#7c65a9",
-        },
-        {
-            title: "My Hero Academia",
-            description: "In a world of heroes, young Midoriya aims to be the best.",
-            image: "",
-            theme: "#9bafd9",
-        },
-        {
-            title: "Fullmetal Alchemist",
-            description: "The Elric brothers embark on a journey to restore their bodies.",
-            image: "",
-            theme: "#bf0fff",
-        },
-        {
-            title: "Demon Slayer",
-            description: "Tanjiro battles demons to save his sister and avenge his family.",
-            image: "",
-            theme: "#0061ff",
-        },
-    ];
 
     let navigate = useNavigate();
 
@@ -145,9 +101,11 @@ function Home() {
             </div>
         }
         <div className={`${themeValue.theme} text-${themeValue.fontsize} text-${themeValue.fontcolor}-500 text-${themeValue.fontstyle}`}>
+
             <div className="pt-2 md:pt-6">
-                <HomeSlider slides={slides} />
+                <HomeSlider />
             </div>
+            
             <CategorySlider />
             <ViewBlogs handleSearch={handleSearch} handleLayoutChange={handleLayoutChange} handleSort={handleSort} blogs_data={blogs_data} layout={layout} trainding_data={trainding_data} authors_data={authors_data} similier_data={similier_data} />
             <Pagination />

@@ -3,10 +3,10 @@ import { BlogDataContext } from '../../../context/Blog_Context';
 import { useTheme } from '../../../context/ThemeContext';
 
 const Settings = () => {
-    const { theme, setTheme, setTheme2, fontColor, setFontColor, fontWeight, setFontWeight, fontStyle, setFontStyle , handleInputChange ,updateThemeData,getThemeData } = useContext(BlogDataContext);
-    const {themeValue} = useTheme();
+    const { theme, setTheme, setTheme2, fontColor, setFontColor, fontWeight, setFontWeight, fontStyle, setFontStyle , handleInputChange } = useContext(BlogDataContext);
+    const {themeValue,updateThemeValue,refreshTheme} = useTheme();
     useEffect(()=>{
-        getThemeData()
+        refreshTheme()
     },[]);
 
     return (
@@ -241,7 +241,7 @@ const Settings = () => {
                 </div>
 
                 
-                <div onClick={updateThemeData} className='m-2'>
+                <div onClick={updateThemeValue} className='m-2'>
                         <button className='px-4 py-2 bg-blue-500 text-white m-2 rounded-lg'>SAVE</button>
                     </div>
                 {/* <div className={`w-full lg:w-2/3 bg-gray-300`}>
